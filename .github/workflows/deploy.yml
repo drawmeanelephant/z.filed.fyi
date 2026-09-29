@@ -52,6 +52,7 @@ jobs:
 
       # --project-root stays "." and --output is absolute: a relative
       # project-root silently produces an empty RAG bundle (docs/HOMESTEAD.md B1).
+      # Post-processing order mirrors `make publish`: strip, enhance, prune, verify.
       - name: Build and validate
         run: |
           set -euo pipefail
@@ -59,9 +60,12 @@ jobs:
           "$RUNNER_TEMP/la-famille-bin" --project-root . build
           "$RUNNER_TEMP/la-famille-bin" --project-root . \
             rag --output "$PWD/public/rag-archive"
+          python3 scripts/strip-internal-nofollow.py
+          python3 scripts/enhance-artifact.py
           ./scripts/prune-unused-assets.sh
           "$RUNNER_TEMP/la-famille-bin" --project-root . publish-check
           test -s public/rag-archive/rag-content.md
+          test -s public/404.html
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
