@@ -14,6 +14,8 @@ rag: build
 	$(LA_FAMILLE) --project-root $(PROJECT_ROOT) rag --output $(OUTPUT)
 
 publish: build rag
+	python3 scripts/strip-internal-nofollow.py
+	python3 scripts/enhance-artifact.py
 	./scripts/prune-unused-assets.sh
 	$(LA_FAMILLE) --project-root $(PROJECT_ROOT) publish-check
 

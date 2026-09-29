@@ -21,6 +21,16 @@ Z.ai is the international face of Zhipu AI (智谱), the Beijing lab that has be
     <span class="card-title">Code on Z.ai</span>
     <span class="card-body">The GLM Coding Plan for Claude Code, OpenCode, and more.</span>
   </a>
+  <a class="card" href="autoclaw/">
+    <span class="card-kicker">Agent tools</span>
+    <span class="card-title">AutoClaw</span>
+    <span class="card-body">Z.ai's one-click desktop client for the OpenClaw framework.</span>
+  </a>
+  <a class="card" href="zcode/">
+    <span class="card-kicker">Agent tools</span>
+    <span class="card-title">ZCode</span>
+    <span class="card-body">The first-party coding workbench built around GLM-5.3.</span>
+  </a>
   <a class="card" href="api/">
     <span class="card-kicker">Developer</span>
     <span class="card-title">Build on Z.ai</span>
@@ -32,7 +42,7 @@ Z.ai is the international face of Zhipu AI (智谱), the Beijing lab that has be
 
 - **GLM-5.3** (August 2026) is the flagship: a post-training upgrade over GLM-5.2 that Z.ai reports as a 50 percent coding gain, with state-of-the-art results among open-weight models on benchmark suites such as Terminal Bench 3.0. It is also the release that showed unexpected cybersecurity capability, and the first flagship outside the MIT license the series used through GLM-5.2.
 - **GLM-5.3-Flash** (August 2026) is the complementary release: a natively multimodal model with 320B total and 18B active parameters, MIT licensed, that powers chat.z.ai and runs at one tenth the price of the flagship.
-- **chat.z.ai and the GLM Coding Plan** are the two front doors into that stack. The coding plan starts at 18 USD per month and is accepted by more than twenty agent harnesses, including Claude Code, Cline, OpenCode, and the ZCode and OpenClaw tools.
+- **chat.z.ai, the GLM Coding Plan, and the agent tools** are the front doors into that stack. The coding plan starts at 18 USD per month and is accepted by more than twenty agent harnesses, including Claude Code, Cline, OpenCode, and the ZCode and OpenClaw tools; [AutoClaw](autoclaw/index.md) and [ZCode](zcode/index.md) are Z.ai's own clients in that world.
 
 ## The record
 
@@ -40,7 +50,7 @@ Zhipu began in June 2019 as a spin-out of Tsinghua University's Knowledge Engine
 
 ## Explore
 
-Beyond the three products, the guide carries the full model line ([Models](models/index.md)), the corporate record ([Company](company/index.md)), the platform map ([Ecosystem](ecosystem/index.md)), and the day-by-day history ([History](history/index.md)). This edition is also available in Chinese: [中文版](zh/index.md).
+The [Products](products/index.md) page indexes every surface this guide covers. Beyond it, the guide carries the full model line ([Models](models/index.md)), the corporate record ([Company](company/index.md)), the platform map ([Ecosystem](ecosystem/index.md)), and the day-by-day history ([History](history/index.md)). This edition is also available in Chinese: [中文版](zh/index.md).
 
 ## How this guide is built
 

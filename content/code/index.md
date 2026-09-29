@@ -27,13 +27,13 @@ Credits are consumed by tokens, weighted per model: on the current multipliers, 
 
 The selling point is compatibility. Z.ai's documentation names Claude Code, Cline, OpenCode, Kilo Code, and Clawdbot/OpenClaw among supported harnesses, and independent trackers put the count past twenty tools, including ZCode, Cursor, and Zed-adjacent setups. All plans also bundle MCP servers for vision understanding, web search, web reading, and Zread (repository reading).
 
-In September 2026 Z.ai ran a campaign giving paid users unlimited GLM-5.3-Flash through ZCode and AutoClaw overnight (23:00 to 09:00, September 3 to October 7) with doubled quotas elsewhere, which says as much about the company's growth ambitions as any benchmark table.
+In September 2026 Z.ai ran a campaign giving paid users unlimited GLM-5.3-Flash through [ZCode](../zcode/index.md) and [AutoClaw](../autoclaw/index.md) overnight (23:00 to 09:00, September 3 to October 7) with doubled quotas elsewhere, which says as much about the company's growth ambitions as any benchmark table.
 
 ## ZCode and friends
 
-ZCode (zcode.z.ai) is Z.ai's first-party coding harness: a multi-agent coding workbench that reached 7,000+ GitHub stars within weeks of its September 2026 creation and has its own plugin marketplace. It is the natural companion to the plan, though the plan does not require it. For team purchases, a Team Plan adds seat management, usage analytics, and budget controls.
+[ZCode](../zcode/index.md) (zcode.z.ai) is Z.ai's first-party coding harness: a multi-agent coding workbench that reached 7,000+ GitHub stars within weeks of its September 2026 creation and has its own plugin marketplace. It is the natural companion to the plan, though the plan does not require it. The plan's other first-party client, [AutoClaw](../autoclaw/index.md), is covered on its own page. For team purchases, a Team Plan adds seat management, usage analytics, and budget controls.
 
-Mobile and device automation is the other wing: AutoGLM-Phone-Multilingual, released in December 2025, executes tasks across 50+ apps via ADB, and the open-source Open-AutoGLM framework has become one of the company's most-starred repositories.
+Mobile and device automation is the other wing: [AutoGLM-Phone-Multilingual](../autoglm/index.md), released in December 2025, executes tasks across 50+ apps via ADB, and the open-source Open-AutoGLM framework has become one of the company's most-starred repositories.
 
 ## How to choose
 

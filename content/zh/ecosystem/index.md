@@ -12,7 +12,11 @@ layout: "layout-zai-zh"
 
 ## 智能体工具
 
-GLM 编程套餐宣称兼容二十余种编程智能体。官方点名的包括 Claude Code、Cline、OpenCode 与 Kilo Code；Z.ai 文档还把 Clawdbot/OpenClaw 与自家的 ZCode 并列列出——后者是公司的第一方编程智能体（2026 年 9 月上线后数周内星标超过 7,000，并拥有自己的插件市场）。第三方统计把 Cursor、Zed 流水线等也计入名单。潜台词是：让模型去找开发者，而不是要求开发者换工具。
+GLM 编程套餐宣称兼容二十余种编程智能体。官方点名的包括 Claude Code、Cline、OpenCode 与 Kilo Code；Z.ai 文档还把 Clawdbot/OpenClaw 与自家的 [ZCode](../zcode/index.md) 并列列出（后者是公司的第一方编程智能体，2026 年 9 月上线后数周内星标超过 7,000，并拥有自己的插件市场）；[AutoClaw](../autoclaw/index.md) 则是公司面向该框架的一键桌面客户端。第三方统计把 Cursor、Zed 流水线等也计入名单。潜台词是：让模型去找开发者，而不是要求开发者换工具。
+
+## 关于 OpenClaw
+
+名单里的一个名字值得交代背景。OpenClaw 是独立的开源项目，并非 Z.ai 的产品：一个自托管的个人智能体框架，创建于 2025 年 11 月（早期曾用名 Clawdbot），MIT 许可，现由一个非营利基金会治理；它的网关运行在你自己的机器上，并嵌进你已经在用的聊天应用。Z.ai 为其生态持续投入：编程套餐支持它，[AutoClaw](../autoclaw/index.md) 就是 Z.ai 为它打造的客户端；而 [ZCode](../zcode/index.md) 是另一款围绕 GLM-5.3 构建的第一方工具。
 
 ## 工具与协议
 
@@ -22,7 +26,7 @@ GLM 编程套餐宣称兼容二十余种编程智能体。官方点名的包括 
 
 - **云与推理服务商**。GLM-5.x 模型卡列出的服务伙伴包括 Together、Novita、DeepInfra 与 Featherless——开放权重领域常见的一组名字。
 - **芯片**。多家独立分析称 2026 年的旗舰世代全程在华为昇腾芯片上训练；Z.ai 也表示 GLM-Image 完全基于国产算力训练。无论对地缘政治持何种看法，这是一个在这个规模上西方没有对应物的供应链事实。
-- **设备**。AutoGLM 系列把技术栈延伸到手机：AutoGLM-Phone-Multilingual 通过 ADB 在 50 多个应用中执行任务，开源仓库 Open-AutoGLM 是公司星标最多的项目之一。
+- **设备**。[AutoGLM](../autoglm/index.md) 系列把技术栈延伸到手机：AutoGLM-Phone-Multilingual 通过 ADB 在 50 多个应用中执行任务，开源仓库 Open-AutoGLM 是公司星标最多的项目之一。
 
 ## 竞争格局
 
@@ -37,5 +41,6 @@ GLM-5.2 的基准表自己列出了对照：Qwen3.7-Max（阿里）、MiniMax M3
 - [GLM 编程套餐总览](https://docs.z.ai/devpack/overview) 与 [文档索引](https://docs.z.ai/llms.txt)
 - 模型卡：[GLM-5.2](https://huggingface.co/zai-org/GLM-5.2)、[GLM-5.3-Flash](https://huggingface.co/zai-org/GLM-5.3-Flash)（服务商列表）
 - [GitHub：zai-org](https://github.com/zai-org)（ZCode、Open-AutoGLM、插件市场）
+- OpenClaw 项目（独立于 Z.ai）：[openclaw.ai](https://openclaw.ai/)、[github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
 - 训练硬件报道：Towards AI、Bad Labels（2026-02）；[发布说明](https://docs.z.ai/release-notes/new-released)（GLM-Image、AutoGLM-Phone）
 - 社区视角：latent.space（2026-08-22）、smol.ai（2026-08-24）

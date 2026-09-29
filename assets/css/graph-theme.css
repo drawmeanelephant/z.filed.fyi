@@ -1,0 +1,33 @@
+/* Graph explorer theme override - aligns the explorer with the zai theme.
+   Loaded after explorer.css on /graph/ only (injected at publish time). */
+@font-face { font-family:"General Sans"; src:url("../fonts/GeneralSans-Variable.woff2") format("woff2"); font-weight:200 700; font-style:normal; font-display:swap; }
+
+:root, .kgx-root {
+  --kgx-bg:#0E0F10;
+  --kgx-fg:#ECECEA;
+  --kgx-muted:#9DA0A5;
+  --kgx-accent:#FF5C33;
+  --kgx-accent-strong:#FF5C33;
+  --kgx-render:#FF5C33;
+  --kgx-raw:#D9A441;
+  --kgx-stub:#8A8E95;
+  --kgx-orphan:#9AA0A6;
+  --kgx-stroke:#45494F;
+  --kgx-card:#16181A;
+  --kgx-border:#26282B;
+  --kgx-focus:#FF5C33;
+}
+
+body.kgx-root { font-family:"General Sans","PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif; }
+.kgx-root button, .kgx-root input, .kgx-root .kgx-help, .kgx-root .kgx-suggestions,
+.kgx-root .kgx-toggle, .kgx-root .kgx-card { border-radius:0 !important; }
+.kgx-root .kgx-title { font-weight:300; letter-spacing:-.01em; }
+
+/* QA follow-up: clearer states and affordances */
+.kgx-root .kgx-toggle[aria-pressed="false"] { opacity:.6; }
+.kgx-root .kgx-toggle[aria-pressed="true"] { border-color:var(--kgx-accent); }
+.kgx-root .kgx-search input { background:var(--kgx-card); border:1px solid var(--kgx-border); color:var(--kgx-fg); }
+.kgx-root .kgx-search input::placeholder { color:var(--kgx-muted); }
+
+/* QA follow-up: node label legibility floor */
+.kgx-root .kgx-svg .kgx-node text { font-size: 12px; font-weight: 500; }

@@ -11,7 +11,11 @@ A model family is only as useful as the surfaces it plugs into. Zhipu's ecosyste
 
 ## Agent harnesses
 
-The GLM Coding Plan advertises compatibility with more than twenty coding agents. The officially named set includes Claude Code, Cline, OpenCode, and Kilo Code, and Z.ai's own documentation explicitly lists Clawdbot/OpenClaw alongside ZCode, the company's first-party coding harness (7,000+ stars within weeks of its September 2026 debut, with its own plugin marketplace). Third-party trackers add Cursor, Zed pipelines, and others to the list. The subtext: Z.ai's models meet developers wherever they already work rather than demanding a new editor.
+The GLM Coding Plan advertises compatibility with more than twenty coding agents. The officially named set includes Claude Code, Cline, OpenCode, and Kilo Code, and Z.ai's own documentation explicitly lists Clawdbot/OpenClaw alongside [ZCode](../zcode/index.md), the company's first-party coding harness (7,000+ stars within weeks of its September 2026 debut, with its own plugin marketplace), and [AutoClaw](../autoclaw/index.md), its one-click desktop client for that framework. Third-party trackers add Cursor, Zed pipelines, and others to the list. The subtext: Z.ai's models meet developers wherever they already work rather than demanding a new editor.
+
+## OpenClaw, briefly
+
+One name in that list deserves context. OpenClaw is an independent open-source project, not a Z.ai product: a self-hosted personal agent framework created in November 2025, formerly known as Clawdbot, MIT licensed, and now stewarded by a nonprofit foundation. It runs a gateway on your own machine and meets you inside the chat apps you already use. Z.ai builds for its ecosystem, and prominently: the coding plan supports it, and [AutoClaw](../autoclaw/index.md) is Z.ai's client for it. [ZCode](../zcode/index.md) is a separate first-party tool, built around the GLM-5.3 line.
 
 ## Tools and protocols
 
@@ -21,7 +25,7 @@ All coding plan tiers bundle MCP servers for vision understanding, web search, w
 
 - **Clouds and inference providers.** The GLM-5.x model cards list serving partners including Together, Novita, DeepInfra, and Featherless - the usual open-weights constellation.
 - **Silicon.** The 2026 flagship generation is reported by multiple independent analyses to have been trained entirely on Huawei Ascend chips, and GLM-Image was described by Z.ai as fully trained on domestic hardware. Whatever one thinks of the geopolitics, it is a supply-chain fact with no western parallel at this scale.
-- **Devices.** The AutoGLM line extends the stack to phones: AutoGLM-Phone-Multilingual executes tasks across 50+ apps via ADB, and the open-source Open-AutoGLM repository is among the company's most-starred projects.
+- **Devices.** The [AutoGLM](../autoglm/index.md) line extends the stack to phones: AutoGLM-Phone-Multilingual executes tasks across 50+ apps via ADB, and the open-source Open-AutoGLM repository is among the company's most-starred projects.
 
 ## The competitive frame
 
@@ -36,5 +40,6 @@ Ecosystems change weekly. Everything here is dated and sourced; treat it as a sn
 - [GLM Coding Plan overview](https://docs.z.ai/devpack/overview) and [docs index](https://docs.z.ai/llms.txt)
 - Model cards: [GLM-5.2](https://huggingface.co/zai-org/GLM-5.2), [GLM-5.3-Flash](https://huggingface.co/zai-org/GLM-5.3-Flash) (provider lists)
 - [GitHub: zai-org](https://github.com/zai-org) (ZCode, Open-AutoGLM, plugin markets)
+- OpenClaw project (independent of Z.ai): [openclaw.ai](https://openclaw.ai/), [github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
 - Reported training-hardware detail: Towards AI, Bad Labels (Feb 2026); [release notes](https://docs.z.ai/release-notes/new-released) (GLM-Image, AutoGLM-Phone)
 - Community framing: latent.space (2026-08-22), smol.ai (2026-08-24)

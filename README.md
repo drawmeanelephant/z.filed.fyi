@@ -1,7 +1,7 @@
 # Z.ai Field Guide
 
 A bilingual (English + Chinese) static site about Z.ai and Zhipu AI: the company's
-history, chat.z.ai, code.z.ai, and the GLM model line. Generated with
+history, chat.z.ai, the GLM Coding Plan, and the GLM model line. Generated with
 [la-famille](../../README.md), a static site generator written in Go.
 
 ## Build
@@ -15,6 +15,8 @@ la-famille --project-root . rag --output "$PWD/public/rag-archive"
 ```
 
 Or with make: `make build`, `make check`, `make rag`, `make publish`.
+
+`make publish` runs two post-processing passes over the artifact: `scripts/strip-internal-nofollow.py` (internal links lose the sanitizer's `rel="nofollow"`; external links keep it) and `scripts/enhance-artifact.py` (hreflang alternates, graph theme injection, full-body search index, taxonomy cleanup, sitemap entry).
 
 `public/` is the complete publish artifact. The site ships no external assets:
 fonts and images are self-hosted.

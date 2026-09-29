@@ -21,6 +21,16 @@ Z.ai 是智谱 AI（Zhipu AI）的国际平台。这家来自北京的公司自 
     <span class="card-title">在 Z.ai 编程</span>
     <span class="card-body">GLM 编程套餐：支持 Claude Code 等工具。</span>
   </a>
+  <a class="card" href="autoclaw/">
+    <span class="card-kicker">智能体</span>
+    <span class="card-title">AutoClaw</span>
+    <span class="card-body">Z.ai 为 OpenClaw 打造的一键桌面客户端。</span>
+  </a>
+  <a class="card" href="zcode/">
+    <span class="card-kicker">智能体</span>
+    <span class="card-title">ZCode</span>
+    <span class="card-body">围绕 GLM-5.3 打造的第一方编程工作台。</span>
+  </a>
   <a class="card" href="api/">
     <span class="card-kicker">开发者</span>
     <span class="card-title">在 Z.ai 开发</span>
@@ -32,7 +42,7 @@ Z.ai 是智谱 AI（Zhipu AI）的国际平台。这家来自北京的公司自 
 
 - **GLM-5.3**（2026 年 8 月）是旗舰模型：在 GLM-5.2 的基座之上仅通过后训练升级，据 Z.ai 公布在自研评测 Z.ai Code Bench 上带来 50% 的编程能力提升，并在 Terminal Bench 3.0 等公开基准上取得开源模型最优结果。它同时展示了超出预期的网络安全能力，也是该系列首次采用自定义许可（而非 MIT）的旗舰。
 - **GLM-5.3-Flash**（2026 年 8 月）是配套发布：原生多模态、320B 总参数 / 18B 激活参数、MIT 许可，既驱动 chat.z.ai，也以旗舰十分之一的价格提供服务。
-- **chat.z.ai 与 GLM 编程套餐** 是通往这套能力的两扇门。编程套餐每月 18 美元起，目前可接入包括 Claude Code、Cline、OpenCode、ZCode 与 OpenClaw 在内的二十余种智能体工具。
+- **chat.z.ai、GLM 编程套餐与智能体工具** 是通往这套能力的多扇门。编程套餐每月 18 美元起，目前可接入包括 Claude Code、Cline、OpenCode、ZCode 与 OpenClaw 在内的二十余种智能体工具；[AutoClaw](autoclaw/index.md) 与 [ZCode](zcode/index.md) 是 Z.ai 自家的两款客户端。
 
 ## 记录
 
@@ -40,7 +50,7 @@ Z.ai 是智谱 AI（Zhipu AI）的国际平台。这家来自北京的公司自 
 
 ## 探索
 
-除三款产品之外，手册还包含完整的[模型线](models/index.md)、[公司档案](company/index.md)、[生态地图](ecosystem/index.md)与分阶段的[历史](history/index.md)。本站同样提供英文版：[English edition](/)。
+[产品](products/index.md)页汇总了本站覆盖的全部产品面。除此之外，手册还包含完整的[模型线](models/index.md)、[公司档案](company/index.md)、[生态地图](ecosystem/index.md)与分阶段的[历史](history/index.md)。本站同样提供英文版：[English edition](/)。
 
 ## 本站如何构建
 
