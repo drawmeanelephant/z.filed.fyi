@@ -1,0 +1,25 @@
+<footer class="z-footer">
+  <div class="z-footer-grid z-wrap">
+    <div class="z-footer-brand">
+      <span class="z-footer-name">{{.Site.SiteName}}</span>
+      <p class="z-footer-note">An independent guide to Z.ai, Zhipu AI and the GLM model line. Every page lists its sources.</p>
+    </div>
+    <div class="z-footer-col">
+      <span class="z-footer-head">Guide</span>
+      <a href="/models/">Models</a>
+      <a href="/history/">History</a>
+      <a href="/company/">Company</a>
+      <a href="/meta/about/">About and method</a>
+    </div>
+    <div class="z-footer-col">
+      <span class="z-footer-head">This site</span>
+      <a href="/la-famille/">la-famille, the engine</a>
+      <a href="/la-famille/how-this-site-works/">How this site works</a>
+      <a href="/la-famille/colophon/">Colophon</a>
+{{ range .Site.SiteLinks }}      <a href="{{.URL}}">{{.Label}}</a>
+{{ end }}    </div>
+  </div>
+  <div class="z-footer-base z-wrap">
+    <p>Not affiliated with Zhipu AI or Z.ai. Built with <a href="/la-famille/">la-famille</a>. Static HTML in pure Go.</p>
+  </div>
+</footer>

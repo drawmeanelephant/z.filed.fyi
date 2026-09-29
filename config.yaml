@@ -1,0 +1,17 @@
+# Z.ai Field Guide - la-famille site configuration
+site_name: "Z.ai Field Guide"
+template: "templates/layout-zai.html"
+content_dir: "content"
+output_dir: "public"
+asset_dir: "assets"
+rag_dir: "rag-archive"
+theme: "zai"
+default_description: "An independent, source-linked guide to Z.ai and Zhipu AI: company history, chat.z.ai, code.z.ai, and the GLM model line."
+default_og_image: "/assets/img/og-default.png"
+siteurl: "https://z.filed.fyi"
+site_links:
+  - label: "Knowledge graph"
+    url: "/graph/"
+  - label: "RAG archive"
+    url: "/rag-archive/rag-content.md"
+graph_explorer: true

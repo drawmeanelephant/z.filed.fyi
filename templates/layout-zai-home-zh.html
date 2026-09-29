@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+{{ template "partials/head-zh.html" . }}
+</head>
+<body class="z-body">
+{{ template "partials/nav-zh.html" . }}
+<section class="z-hero z-wrap">
+  <div class="z-hero-copy">
+    <h1 class="z-hero-title">{{.Title}}</h1>
+    <p class="z-hero-sub">{{.Description}}</p>
+    <div class="z-hero-ctas">
+      <a class="z-btn z-btn--primary" href="/zh/chat/">在 Z.ai 对话</a>
+      <a class="z-btn z-btn--ghost" href="/zh/code/">在 Z.ai 编程</a>
+    </div>
+  </div>
+  <figure class="z-hero-art" aria-hidden="true">
+    <img class="z-art-light" src="/assets/img/paper-a.webp" alt="" width="1600" height="1600">
+    <img class="z-art-dark" src="/assets/img/paper-b.webp" alt="" width="1400" height="1400">
+  </figure>
+</section>
+<main id="main-content" class="z-main">
+  <article class="z-article z-wrap">
+    <div class="z-prose">
+      {{.Content}}
+    </div>
+  </article>
+</main>
+{{ template "partials/footer-zh.html" . }}
+<script src="/assets/js/zai.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
+</body>
+</html>

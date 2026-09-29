@@ -1,0 +1,25 @@
+<a class="z-skip" href="#main-content">跳到主要内容</a>
+<header class="z-header">
+  <div class="z-header-inner z-wrap">
+    <a class="z-brand" href="/zh/">
+      <svg class="z-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9.5 10.5h13L9.5 21.5h13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+      <span class="z-brand-name">Z.ai 参考手册</span>
+    </a>
+    <nav class="z-nav" aria-label="主导航">
+      <a href="/zh/chat/">对话</a>
+      <a href="/zh/code/">编程</a>
+      <a href="/zh/api/">API</a>
+      <a href="/zh/models/">模型</a>
+      <a href="/zh/history/">历史</a>
+      <a href="/zh/company/">公司</a>
+    </nav>
+    <div class="z-utils">
+      {{ template "partials/search-zh.html" . }}
+      <a class="z-util z-lang" id="lang-switch" href="/" hreflang="en" lang="en" aria-label="Switch to English">EN</a>
+      <button class="z-util z-theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="切换深色模式">
+        <svg class="z-i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="z-i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>

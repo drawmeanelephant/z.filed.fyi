@@ -1,0 +1,25 @@
+<a class="z-skip" href="#main-content">Skip to content</a>
+<header class="z-header">
+  <div class="z-header-inner z-wrap">
+    <a class="z-brand" href="/">
+      <svg class="z-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9.5 10.5h13L9.5 21.5h13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+      <span class="z-brand-name">{{.Site.SiteName}}</span>
+    </a>
+    <nav class="z-nav" aria-label="Main">
+      <a href="/chat/">Chat</a>
+      <a href="/code/">Code</a>
+      <a href="/api/">API</a>
+      <a href="/models/">Models</a>
+      <a href="/history/">History</a>
+      <a href="/company/">Company</a>
+    </nav>
+    <div class="z-utils">
+      {{ template "partials/search.html" . }}
+      <a class="z-util z-lang" id="lang-switch" href="/zh/" hreflang="zh-CN" lang="zh-CN" aria-label="Switch to Chinese">中文</a>
+      <button class="z-util z-theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+        <svg class="z-i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="z-i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
