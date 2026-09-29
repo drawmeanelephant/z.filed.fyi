@@ -1,0 +1,131 @@
+name: Content freshness
+
+# Re-asserts the facts the site hardcodes (star counts, changelog versions,
+# model release dates) against their live sources. Static content cannot notice
+# that it has gone stale; this can.
+on:
+  schedule:
+    # Weekly, Monday 06:11 UTC. Off the hour so this does not pile onto the
+    # crowded top-of-hour scheduling wave.
+    - cron: "11 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: freshness
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      drift: ${{ steps.check.outputs.drift }}
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Re-check cited facts
+        id: check
+        env:
+          # Authenticated so the GitHub API budget is 5000/hr rather than 60/hr;
+          # the checker walks ~21 repositories on every run.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          # One run produces both artifacts: the text is rendered from the JSON
+          # rather than by re-running the checker, which would double the number
+          # of GitHub API calls for no benefit.
+          python3 scripts/check-freshness.py --json > freshness.json || true
+          python3 - <<'PY' | tee freshness.txt
+          import json
+          report = json.load(open("freshness.json"))
+          marks = {"ok": "OK   ", "drift": "DRIFT", "error": "ERROR"}
+          for r in report["results"]:
+              line = f"{marks[r['status']]:5}  {r['check']:<15} {r['id']}"
+              if r["status"] == "drift" and "expected" in r:
+                  line += f"  (site: {r['expected']} -> live: {r['live']})"
+              if r.get("detail"):
+                  line += f"  {r['detail']}"
+              if r.get("page"):
+                  line += f"  [{r['page']}]"
+              print(line)
+          print(f"\n{report['ok']} ok · {report['drift']} drift · {report['errors']} error")
+          PY
+          drift=$(python3 -c "import json;print(json.load(open('freshness.json'))['drift'])")
+          echo "drift=$drift" >> "$GITHUB_OUTPUT"
+
+      - name: Summarise
+        run: |
+          {
+            echo "## Content freshness"
+            echo
+            echo "Automated re-check of the facts this site hardcodes. Each entry"
+            echo "names the page to update and the live value that replaced the recorded one."
+            echo
+            echo '```'
+            cat freshness.txt
+            echo '```'
+            echo
+            echo "_Opened/updated by [\`check-freshness.yml\`](https://github.com/drawmeanelephant/z.filed.fyi/actions/runs)._"
+            echo "To resolve: update the value in \`scripts/claims.json\` and the page it points to, then re-run this workflow."
+          } > issue-body.md
+
+      # One rolling issue, not a new one per run: search for the existing issue
+      # first and comment on it, so a persistent problem stays one thread.
+      - name: Open or update the drift issue
+        if: steps.check.outputs.drift != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          number=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --label freshness \
+            --json number \
+            --jq '.[0].number' || true)
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --repo "$GITHUB_REPOSITORY" --body-file issue-body.md
+            echo "commented on #$number"
+          else
+            gh issue create \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "Cited facts have drifted from their live sources" \
+              --label freshness \
+              --body-file issue-body.md
+          fi
+
+      # Close the tracker when a run finds nothing, so the site is not left
+      # carrying an open "this is wrong" issue that is no longer true.
+      - name: Close the drift issue when clean
+        if: steps.check.outputs.drift == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          number=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --label freshness \
+            --json number \
+            --jq '.[0].number' || true)
+          if [ -n "$number" ]; then
+            gh issue close "$number" --repo "$GITHUB_REPOSITORY" \
+              --comment "A fresh run found all cited facts in range; closing."
+            echo "closed #$number"
+          else
+            echo "nothing to close"
+          fi
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freshness-report
+          path: |
+            freshness.txt
+            freshness.json
+          retention-days: 30

@@ -48,6 +48,39 @@ Pages on every push to `main` (and on manual dispatch).
   at `.` and passes an absolute `--output`.
 - Watch runs with `gh run list` / `gh run watch`.
 
+## Content freshness
+
+A static site cannot notice that a fact it hardcoded has gone stale.
+`.github/workflows/freshness.yml` re-asserts those facts weekly against their
+live sources and opens (or updates) a single `freshness`-labelled issue when
+they drift, closing it again once they are back in range.
+
+What it checks, against `scripts/claims.json`:
+
+| Group | Source | Covers |
+|---|---|---|
+| `github` | GitHub API | 19 repositories' star counts (`zai-org`, `THUDM`) |
+| `repos` | GitHub API | license and creation date for the two repos the site states structurally |
+| `changelogs` | zcode.z.ai, autoclaw.z.ai | newest published version vs the version cited |
+| `model_releases` | docs.z.ai release notes | release dates for GLM-5.3 and GLM-5.3-Flash |
+
+Run it by hand:
+
+```sh
+python3 scripts/check-freshness.py           # human-readable
+python3 scripts/check-freshness.py --json    # machine-readable
+python3 scripts/check-freshness.py --only github
+```
+
+Exits non-zero on drift **or** on a fetch failure, so a check that cannot reach
+the network never reports success. Set `GITHUB_TOKEN` to use the authenticated
+API budget (5000/hr instead of 60/hr); the run walks ~21 repositories.
+
+**Tolerances are deliberate.** Star counts move daily, so each entry carries a
+`star_tolerance_k`. Routine drift stays silent; a repo that is renamed, deleted,
+relicensed, or jumps a major version still trips the check. When you do update a
+figure, update both `scripts/claims.json` and the page it names.
+
 ## Notes
 
 - This is an independent project. Not affiliated with Zhipu AI or Z.ai.
