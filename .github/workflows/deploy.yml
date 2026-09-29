@@ -1,0 +1,78 @@
+name: Build and deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time; a newer push supersedes a queued run.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # Pinned generator release. Bump deliberately, not automatically.
+  LA_FAMILLE_VERSION: v0.1.0-prealpha
+  LA_FAMILLE_REPO: drawmeanelephant/la-famille
+  PAGES_PROJECT: z-filed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Check out la-famille release metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          version="${LA_FAMILLE_VERSION#v}"
+          base="https://github.com/${LA_FAMILLE_REPO}/releases/download/${LA_FAMILLE_VERSION}"
+          mkdir -p "$RUNNER_TEMP/la-famille"
+          curl --fail --location --silent --show-error \
+            "$base/SHA256SUMS" -o "$RUNNER_TEMP/la-famille/SHA256SUMS"
+          curl --fail --location --silent --show-error \
+            "$base/la-famille_${version}_linux_amd64.tar.gz" \
+            -o "$RUNNER_TEMP/la-famille/la-famille.tar.gz"
+          cd "$RUNNER_TEMP/la-famille"
+          grep "la-famille_${version}_linux_amd64.tar.gz" SHA256SUMS \
+            | sha256sum --check --strict
+          tar -xzf la-famille.tar.gz
+          install -m 0755 la-famille "$RUNNER_TEMP/la-famille-bin"
+          "$RUNNER_TEMP/la-famille-bin" --version
+
+      # --project-root stays "." and --output is absolute: a relative
+      # project-root silently produces an empty RAG bundle (docs/HOMESTEAD.md B1).
+      - name: Build and validate
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/la-famille-bin" --project-root . check
+          "$RUNNER_TEMP/la-famille-bin" --project-root . build
+          "$RUNNER_TEMP/la-famille-bin" --project-root . \
+            rag --output "$PWD/public/rag-archive"
+          ./scripts/prune-unused-assets.sh
+          "$RUNNER_TEMP/la-famille-bin" --project-root . publish-check
+          test -s public/rag-archive/rag-content.md
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: public
+          retention-days: 7
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name "${{ env.PAGES_PROJECT }}" --branch main

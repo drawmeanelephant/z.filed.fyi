@@ -30,6 +30,8 @@ Star counts from GitHub, checked September 29, 2026. The organization is `zai-or
 
 The research side (THUDM) adds the RL post-training framework slime (8.6k), AgentBench (3.8k), LongBench, LongWriter, and the P-tuning line.
 
+The table is a curated shelf, not a complete census. Ten further repos sit above 1.1k stars and are left out here — most notably CogVLM (6.7k) and VisualGLM-6B (4.2k) from the 2023 vision line, plus CodeGeeX4 (2.6k), CogVLM2 (2.4k), GLM-V (2.4k), CogView (1.8k), ImageReward (1.7k), SCAIL-2 (1.2k), CogAgent (1.2k), and CogView4 (1.1k).
+
 ## The license arc
 
 - **2022-2025: MIT where it mattered.** GLM-130B through GLM-5.2 shipped under permissive licenses; the GLM-5.2 card's own words are "Pure Open: no regional limits, technical access without borders."

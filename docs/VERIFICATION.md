@@ -16,8 +16,12 @@ sources re-audited (every URL opened; see appendix).
 - Corrections applied: **14 clusters** (dates, numbers, links, product naming) — all in EN **and** ZH.
 - Verdict counts (claim level): ~250 CONFIRMED · 14 CORRECTED · 0 WRONG-left-standing · 5 UNVERIFIED/soft (listed at the end).
 - Build: `make build` (73 pages, 0 warnings) and `make check` (0 errors, 0 warnings) clean after fixes.
-- Out of scope by brief: `templates/`, `config.yaml`*, `assets/`, build tooling, `README.md`* — untouched.
-  (*Both still carry the old "code.z.ai" phrasing in their page descriptions; flagged for the owner, not edited.)
+- Out of scope by brief: `templates/`, `assets/`, build tooling — untouched.
+- Follow-up (2026-09-29, later session): the deferred `code.z.ai` fixes in `config.yaml` and `README.md` have
+  now been applied ("the GLM Coding Plan"). Re-verified against the source tree: zero bare `code.z.ai`
+  occurrences in `content/`, `config.yaml`, or `README.md` (the only `code.z.ai` substrings left are inside the
+  real domain `zcode.z.ai`). A GitHub API re-check of every star count in `content/company/open-source.md`
+  (EN and ZH) confirmed all 13 rows and both THUDM figures; every `github.com/zai-org/*` link returns 200.
 
 **The single biggest find:** the site repeatedly referenced **`code.z.ai` as a product surface. No such
 domain exists** (NXDOMAIN across resolvers; absent from every Z.ai document). The real surfaces are
@@ -250,8 +254,11 @@ domain exists** (NXDOMAIN across resolvers; absent from every Z.ai document). Th
   plural claim is verified; the specific outlet was not individually located).
 - Several Chinese press citations are domain-level (Sina Finance, 163.com, Ebrun homepage) rather than deep links —
   retained per minimal-diff rule; the underlying facts were verified via the articles found on those sites.
-- `config.yaml` and `README.md` descriptions still say "code.z.ai" — untouched by this audit's scope; fix flagged
-  to the owner.
+- ~~`config.yaml` and `README.md` descriptions still say "code.z.ai"~~ — **resolved in a later session**; both now
+  read "the GLM Coding Plan" (see the follow-up note in the summary above).
+- **Star-table completeness (open, minor):** the table is accurate as written but curated — it omits ten repos above
+  1.1k stars, including CogVLM (6.7k) and VisualGLM-6B (4.2k). The "inventories what is actually on the shelf"
+  framing slightly oversells; every number that *is* stated was re-confirmed against the GitHub API.
 
 ---
 

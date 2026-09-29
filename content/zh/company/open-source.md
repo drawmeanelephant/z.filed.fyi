@@ -31,6 +31,8 @@ layout: "layout-zai-zh"
 
 研究侧（THUDM）还有 RL 后训练框架 slime（8.6k）、AgentBench（3.8k）、LongBench、LongWriter，以及 P-tuning 系列。
 
+上表是精选货架，不是完整普查。另有十个仓库星标超过 1.1k 未列入——尤其是 2023 年视觉线的 CogVLM（6.7k）与 VisualGLM-6B（4.2k），以及 CodeGeeX4（2.6k）、CogVLM2（2.4k）、GLM-V（2.4k）、CogView（1.8k）、ImageReward（1.7k）、SCAIL-2（1.2k）、CogAgent（1.2k）与 CogView4（1.1k）。
+
 ## 许可曲线
 
 - **2022-2025：关键的模型都是 MIT**。GLM-130B 到 GLM-5.2 均使用宽松许可；GLM-5.2 模型卡的原话是「纯开放：无地域限制，无技术获取壁垒」。
