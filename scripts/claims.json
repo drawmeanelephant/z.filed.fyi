@@ -8,33 +8,115 @@
   ],
   "github": {
     "zai-org": {
-      "ChatGLM-6B": { "value": 40942, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "Open-AutoGLM": { "value": 26328, "star_tolerance_k": 0.5, "page": "content/autoglm/index.md" },
-      "ChatGLM2-6B": { "value": 15508, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "ChatGLM3": { "value": 13646, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "CogVideo": { "value": 13048, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "CodeGeeX": { "value": 8804, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "CodeGeeX2": { "value": 7524, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "GLM-130B": { "value": 7649, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "GLM-OCR": { "value": 7479, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "GLM-5": { "value": 7250, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "ZCode": { "value": 7160, "star_tolerance_k": 0.5, "page": "content/zcode/index.md" },
-      "GLM-4": { "value": 7071, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "GLM-4.5": { "value": 4425, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "GLM-4-Voice": { "value": 3238, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "GLM-TTS": { "value": 1066, "star_tolerance_k": 0.2, "page": "content/company/open-source.md" },
-      "GLM-ASR": { "value": 855, "star_tolerance_k": 0.2, "page": "content/company/open-source.md" },
-      "GLM-Image": { "value": 1051, "star_tolerance_k": 0.2, "page": "content/company/open-source.md" }
+      "ChatGLM-6B": {
+        "value": 40942,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "Open-AutoGLM": {
+        "value": 26328,
+        "star_tolerance_k": 0.5,
+        "page": "content/autoglm/index.md"
+      },
+      "ChatGLM2-6B": {
+        "value": 15508,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "ChatGLM3": {
+        "value": 13646,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "CogVideo": {
+        "value": 13048,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "CodeGeeX": {
+        "value": 8804,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "CodeGeeX2": {
+        "value": 7524,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-130B": {
+        "value": 7649,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-OCR": {
+        "value": 7479,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-5": {
+        "value": 7250,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "ZCode": {
+        "value": 5000,
+        "star_tolerance_k": 0.5,
+        "page": "content/zcode/index.md"
+      },
+      "GLM-4": {
+        "value": 7071,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-4.5": {
+        "value": 4425,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-4-Voice": {
+        "value": 3238,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-TTS": {
+        "value": 1066,
+        "star_tolerance_k": 0.2,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-ASR": {
+        "value": 855,
+        "star_tolerance_k": 0.2,
+        "page": "content/company/open-source.md"
+      },
+      "GLM-Image": {
+        "value": 1051,
+        "star_tolerance_k": 0.2,
+        "page": "content/company/open-source.md"
+      }
     },
     "THUDM": {
-      "slime": { "value": 8564, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "AgentBench": { "value": 3759, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" }
+      "slime": {
+        "value": 8564,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      },
+      "AgentBench": {
+        "value": 3759,
+        "star_tolerance_k": 0.5,
+        "page": "content/company/open-source.md"
+      }
     }
   },
   "repos": {
     "_comment": "Structural facts that rarely change but are cheap to re-assert: license and creation date.",
-    "zai-org/ZCode": { "license": "Apache-2.0", "created": "2026-09-20" },
-    "zai-org/Open-AutoGLM": { "license": "Apache-2.0", "created": "2025-12-08" }
+    "zai-org/ZCode": {
+      "license": "Apache-2.0",
+      "created": "2026-09-20"
+    },
+    "zai-org/Open-AutoGLM": {
+      "license": "Apache-2.0",
+      "created": "2025-12-08"
+    }
   },
   "changelogs": {
     "_comment": "Latest published version. The site states these as a dated snapshot, so any newer release is drift worth a human look.",
@@ -46,7 +128,7 @@
     },
     "autoclaw": {
       "url": "https://autoclaw.z.ai/changelog/",
-      "version": "1.17.8",
+      "version": "1.20.0",
       "date": "2026-08-27",
       "page": "content/autoclaw/index.md"
     }
@@ -55,8 +137,14 @@
     "_comment": "Release dates cited on the model pages, keyed by the docs.z.ai release-notes id.",
     "url": "https://docs.z.ai/release-notes/new-released",
     "dates": {
-      "2026-08-18": { "model": "GLM-5.3", "page": "content/models/glm-5-3.md" },
-      "2026-08-26": { "model": "GLM-5.3-Flash", "page": "content/models/glm-5-3-flash.md" }
+      "2026-08-18": {
+        "model": "GLM-5.3",
+        "page": "content/models/glm-5-3.md"
+      },
+      "2026-08-26": {
+        "model": "GLM-5.3-Flash",
+        "page": "content/models/glm-5-3-flash.md"
+      }
     }
   }
 }
