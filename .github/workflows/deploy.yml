@@ -40,13 +40,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/la-famille"
           curl --fail --location --silent --show-error \
             "$base/SHA256SUMS" -o "$RUNNER_TEMP/la-famille/SHA256SUMS"
+          archive="la-famille_${version}_linux_amd64.tar.gz"
           curl --fail --location --silent --show-error \
-            "$base/la-famille_${version}_linux_amd64.tar.gz" \
-            -o "$RUNNER_TEMP/la-famille/la-famille.tar.gz"
+            "$base/$archive" -o "$RUNNER_TEMP/la-famille/$archive"
           cd "$RUNNER_TEMP/la-famille"
-          grep "la-famille_${version}_linux_amd64.tar.gz" SHA256SUMS \
-            | sha256sum --check --strict
-          tar -xzf la-famille.tar.gz
+          # Keep the manifest's own filename: `sha256sum --check` reads the
+          # names in SHA256SUMS, so the archive must be named to match.
+          grep " $archive\$" SHA256SUMS | sha256sum --check --strict
+          tar -xzf "$archive"
           install -m 0755 la-famille "$RUNNER_TEMP/la-famille-bin"
           "$RUNNER_TEMP/la-famille-bin" --version
 
