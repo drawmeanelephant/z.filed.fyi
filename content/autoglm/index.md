@@ -30,7 +30,7 @@ The name also travels as a credit line: AutoClaw's own footer reads "AutoClaw by
 
 ## Open-AutoGLM, the open wing
 
-The framework repository (zai-org/Open-AutoGLM, Apache-2.0) was created on December 8, 2025, and had gathered 26,326 stars by the September 29, 2026 check. Its README describes a mobile-assistant framework built on multimodal screen understanding and ADB control (HDC on HarmonyOS), with safety defaults worth noting: sensitive actions require confirmation, and flows like logins stay with the human. It integrates with Midscene for iOS and Android workflows, and it is published for research and learning use. The companion models, AutoGLM-Phone-9B and AutoGLM-Phone-9B-Multilingual, are MIT licensed and available on Hugging Face; the multilingual variant builds on GLM-4.1V-9B-Base.
+The framework repository (zai-org/Open-AutoGLM, Apache-2.0) was created on December 8, 2025, and had gathered 26.3k stars by the September 29, 2026 check. Its README describes a mobile-assistant framework built on multimodal screen understanding and ADB control (HDC on HarmonyOS), with safety defaults worth noting: sensitive actions require confirmation, and flows like logins stay with the human. It integrates with Midscene for iOS and Android workflows, and it is published for research and learning use. The companion models, AutoGLM-Phone-9B and AutoGLM-Phone-9B-Multilingual, are MIT licensed and available on Hugging Face; the multilingual variant builds on GLM-4.1V-9B-Base.
 
 ## Platform notes
 

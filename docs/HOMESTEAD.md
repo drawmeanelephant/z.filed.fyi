@@ -110,15 +110,17 @@ Minor; listed so the prune script's next iteration knows.
   per-language layouts, theme-level switcher. Latin-only shared taxonomy
   (B2). ZH footer carries hardcoded localized index links because
   `.Site.SiteLinks` labels are global.
-- The build lives at `sites/zai/` inside the la-famille checkout (platform
-  workspace binding); the user-designated GitHub repo `z.filed.fyi` is the
-  publication target — migration is prepared but not executed from here.
+- The build now lives in its own repository (`z.filed.fyi`), and CI builds it on
+  every push to `main` with the pinned release binary. See [README](../README.md#deploy).
 - Data currency: model/product facts are sourced and dated on each page
   (snapshot 2026-09-29). Known tricky items are hedged in copy (GLM-5.3
   license terms, third-party pricing drift).
-- One safety-guard-denied `rm` left an inert nested directory
-  (`sites/zai/sites/`) created by the B1 mis-invocation; remove manually when
-  convenient.
+- ~~One safety-guard-denied `rm` left an inert nested directory
+  (`sites/zai/sites/`) created by the B1 mis-invocation; remove manually when~~
+  **RESOLVED** — the stray directory did not survive the move into this repo;
+  the tree is clean. B1 itself is still open upstream, so CI keeps
+  `--project-root .` with an absolute `--output` and asserts the bundle is
+  non-empty.
 
 ## Publishing notes
 

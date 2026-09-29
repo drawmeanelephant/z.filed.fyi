@@ -13,7 +13,7 @@ ZCode is Z.ai's own coding tool: a multi-agent development environment built alo
 
 Z.ai calls ZCode a full-featured agentic development environment (ADE) for long-horizon tasks, with a proprietary agent, multi-framework compatibility, and mobile remote control. In practice: you open a project (locally, over SSH, or in WSL), assign goals, and watch multiple agents plan, edit, run, and verify from whichever surface you prefer. The company positions it as the pairing to GLM-5.3, co-tuned with the model and BYOK-capable.
 
-The code is open source: the repository (zai-org/ZCode, Apache-2.0) was created on September 20, 2026, and passed 7,000 stars within weeks (7,149 at the September 29 check).
+The code is open source: the repository (zai-org/ZCode, Apache-2.0) was created on September 20, 2026, and passed 7,000 stars within weeks (7.1k at the September 29 check; the count moves daily).
 
 ## How it connects to the plan
 

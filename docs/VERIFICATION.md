@@ -224,6 +224,31 @@ domain exists** (NXDOMAIN across resolvers; absent from every Z.ai document). Th
 | ox-alpha story | CONFIRMED | guide; press | none |
 | "3× quota" on the coding plan; overnight campaign | CONFIRMED | guide; campaign notice | none |
 
+### content/products, /zcode, /qingyan, /autoglm, /autoclaw, /bigmodel (EN + ZH)
+Added on `main` after this audit ran, so they had no coverage. Re-checked 2026-09-29 (later session).
+
+| Claim | Verdict | Source | Action |
+|---|---|---|---|
+| All 13 product/source domains resolve (zcode.z.ai, autoglm.z.ai, autoglm.zhipuai.cn, autoclaw.z.ai, autoclaw.zhipuai.cn, openclaw.ai, open.bigmodel.cn, docs.bigmodel.cn, chatglm.cn, bigmodel.cn, zhipuai.cn, docs.z.ai tool pages) | CONFIRMED | HTTP 200 each | none |
+| ZCode: Apache-2.0, created 2026-09-20, 7k+ stars | CONFIRMED | GitHub API | star count rounded to 7.1k (see note) |
+| Open-AutoGLM: Apache-2.0, created 2025-12-08, 26.3k stars | CONFIRMED | GitHub API | rounded to 26.3k |
+| AutoGLM-Phone-9B / -Multilingual are MIT; multilingual builds on GLM-4.1V-9B-Base | CONFIRMED | HF API (license:mit) | none |
+| ZCode changelog reached 3.14.4 | CONFIRMED | zcode.z.ai/en/changelog | none |
+| AutoClaw changelog at 1.17.8 | CONFIRMED | autoclaw.z.ai/changelog | none |
+| zai-org/zcode-plugins + zai-org/feedback exist | CONFIRMED | GitHub API | none |
+| Qingyan 25M users / revenue +100% (2024 era) | CONSISTENT | matches the audited company + history pages | none |
+| BigModel "billion era" tokens, developer estimates | CARRIED AS REPORTED | page labels both low-confidence | none |
+| AutoClaw "first true one-click OpenClaw" (press framing) | ATTRIBUTED | page attributes to Chinese tech press | none |
+
+**Note on star-count drift.** The new pages originally pinned exact integers (ZCode 7,149; Open-AutoGLM 26,326).
+Both were accurate at their check time but are stale within hours — live counts at re-check were 7,160 and 26,328.
+Rounded to `7.1k` / `26.3k` with a "moves daily" note, matching the style already used on the open-source page.
+The pattern to avoid is exact integers for continuously-changing values.
+
+**Coverage status:** all 29 EN + 29 ZH content files now have verification coverage. The new pages are internally
+honest — each carries an "Honest limits" or "Honest notes" section naming what it could not verify — and no
+unsupportable claim was found in them.
+
 ---
 
 ## Corrections summary (EN + ZH both fixed)

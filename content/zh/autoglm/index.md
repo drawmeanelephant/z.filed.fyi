@@ -31,7 +31,7 @@ AutoGLM 是 Z.ai 技术栈里直接操作设备的那一支：它面向的不是
 
 ## 开源支线：Open-AutoGLM
 
-框架仓库（zai-org/Open-AutoGLM，Apache-2.0）创建于 2025 年 12 月 8 日，截至 2026 年 9 月 29 日核查时星标 26,326。README 描述的是一套基于多模态屏幕理解与 ADB 控制（HarmonyOS 为 HDC）的手机助手框架，安全默认值值得一提：敏感操作需要确认，登录等环节由人接管。它为 iOS 与 Android 工作流提供 Midscene 集成，并声明仅供研究与学习使用。配套模型 AutoGLM-Phone-9B 与 AutoGLM-Phone-9B-Multilingual 为 MIT 许可，可在 Hugging Face 获取；多语言版本基于 GLM-4.1V-9B-Base。
+框架仓库（zai-org/Open-AutoGLM，Apache-2.0）创建于 2025 年 12 月 8 日，截至 2026 年 9 月 29 日核查时星标 26.3k。README 描述的是一套基于多模态屏幕理解与 ADB 控制（HarmonyOS 为 HDC）的手机助手框架，安全默认值值得一提：敏感操作需要确认，登录等环节由人接管。它为 iOS 与 Android 工作流提供 Midscene 集成，并声明仅供研究与学习使用。配套模型 AutoGLM-Phone-9B 与 AutoGLM-Phone-9B-Multilingual 为 MIT 许可，可在 Hugging Face 获取；多语言版本基于 GLM-4.1V-9B-Base。
 
 ## 平台说明
 
