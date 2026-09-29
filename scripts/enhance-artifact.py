@@ -161,6 +161,50 @@ if sjs.exists():
             sjs.write_text(t2, encoding="utf-8")
             bump("search_client")
 
+# ---------- 6b) search client: emit theme classes, not Tailwind utilities ----------
+# The generator's search.js is written against Tailwind (`line-clamp-2`,
+# `badge-xs`, `text-primary`, ...). This theme ships no Tailwind, so every one
+# of those classes resolves to nothing: results lose their clamp, their accent
+# colour, their tag chips, and their separators, and the whole snippet renders
+# as one underlined block at body size. assets/css/zai.css already carries a
+# complete set of `.search-result-*` rules that nothing was ever emitting.
+#
+# Remap the emitted class names onto those existing rules rather than adding a
+# Tailwind shim, so the results match the rest of the theme. Idempotent: each
+# rewrite is guarded by the source string being present.
+CLASS_REMAP = {
+    'className = "block p-4 hover:bg-base-200 text-sm focus-visible:bg-base-200 '
+    'focus-visible:outline-none border-b border-base-200 last:border-0"':
+        'className = "search-result-link"',
+    'className = "font-bold text-base-content"':
+        'className = "search-result-title"',
+    'className = "text-xs font-medium text-primary mt-0.5"':
+        'className = "search-result-section"',
+    'className = "text-xs text-base-content/70 mt-1 line-clamp-2"':
+        'className = "search-result-snippet"',
+    'className = "flex flex-wrap gap-1 mt-1.5"':
+        'className = "search-result-tags"',
+    'className = "badge badge-xs badge-ghost text-[10px]"':
+        'className = "search-result-tag"',
+    'className = "p-2 text-base-content/50"':
+        'className = "search-no-results"',
+}
+
+sjs2 = PUB / "assets/js/search.js"
+if sjs2.exists():
+    t = sjs2.read_text(encoding="utf-8")
+    if "search-result-link" not in t:
+        applied = 0
+        for src, dst in CLASS_REMAP.items():
+            if src in t:
+                t = t.replace(src, dst)
+                applied += 1
+        # The remapped markup lives inside one <a>, so the tag row no longer
+        # needs the padding it had when it was a separate flex row.
+        if applied:
+            sjs2.write_text(t, encoding="utf-8")
+            bump("search_client_theme_classes", applied)
+
 # ---------- 7) styled 404 ----------
 page404 = PUB / "404.html"
 html404 = """<!DOCTYPE html>
