@@ -14,6 +14,7 @@ Idempotent: safe to re-run on an already-enhanced artifact.
      on term archives.
   5. Sitemap: ensures /graph/ is listed.
 """
+import hashlib
 import html as html_mod
 import json
 import pathlib
@@ -247,5 +248,47 @@ a.btn:hover{border-color:var(--accent);color:var(--accent)}
 if (not page404.exists()) or page404.read_text(encoding="utf-8") != html404:
     page404.write_text(html404, encoding="utf-8")
     bump("page_404")
+
+# ---------- 8) cache-bust asset URLs ----------
+# Cloudflare serves /assets/* with a multi-hour max-age, and the generator
+# emits plain unversioned paths. A deploy therefore does not reach anyone who
+# already visited: they keep the old CSS and JS until it expires. That is how a
+# real fix (the search-result remap) can sit deployed while the live site still
+# runs the broken script.
+#
+# Append each asset's own content hash as a query parameter. A changed file gets
+# a new URL and is fetched immediately; an unchanged one keeps its URL and stays
+# in cache. The hash is of the published file, so it cannot drift from it.
+ASSET_REF = re.compile(r'((?:src|href)=")(/assets/[^"?#]+)(\?v=[a-f0-9]+)?(#[^"]*)?(")')
+
+
+def asset_version(path: str) -> str:
+    target = PUB / path.lstrip("/")
+    if not target.is_file():
+        return ""
+    return hashlib.sha256(target.read_bytes()).hexdigest()[:8]
+
+
+for page in list(PUB.rglob("*.html")):
+    text = page.read_text(encoding="utf-8")
+    original = text
+    cache = {}
+
+    def with_version(m):
+        path = m.group(2)
+        if path not in cache:
+            cache[path] = asset_version(path)
+        version = cache[path]
+        if not version:
+            return m.group(0)
+        # Rebuild from the bare path, replacing any version already present.
+        # Matching the optional ?v group is what makes a re-run recompute
+        # instead of skipping, so a changed file always yields a new URL.
+        return f'{m.group(1)}{path}?v={version}{m.group(4) or ""}{m.group(5)}'
+
+    text = ASSET_REF.sub(with_version, text)
+    if text != original:
+        page.write_text(text, encoding="utf-8")
+        bump("cache_busted_pages")
 
 print("enhance-artifact:", ", ".join(f"{k}={v}" for k, v in sorted(changed.items())) or "nothing to do")
