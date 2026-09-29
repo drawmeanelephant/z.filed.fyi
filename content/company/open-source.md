@@ -26,9 +26,9 @@ Star counts from GitHub, checked September 29, 2026. The organization is `zai-or
 | ZCode | Z.ai's coding agent harness | 7.1k |
 | GLM-4 / GLM-4.5 | Series repositories | 7.1k / 4.4k |
 | GLM-4-Voice | End-to-end speech | 3.2k |
-| GLM-TTS, GLM-ASR, GLM-Image | Speech and image models (2025-2026) | 1.0k+ each |
+| GLM-TTS, GLM-ASR, GLM-Image | Speech and image models (2025-2026) | 1.1k / 0.9k / 1.1k |
 
-The research side (THUDM) adds the RL post-training framework slime (8.6k), AgentBench (3.8k), LongBench, LongWriter, and the P-tuning line that predates the company itself.
+The research side (THUDM) adds the RL post-training framework slime (8.6k), AgentBench (3.8k), LongBench, LongWriter, and the P-tuning line.
 
 ## The license arc
 
@@ -44,4 +44,4 @@ Two framings coexist, and both are in evidence. The generous reading: a lab that
 
 - [GitHub org: zai-org](https://github.com/zai-org) and [THUDM](https://github.com/THUDM) (repository data via GitHub API, 2026-09-29)
 - Model cards for license fields: [GLM-5.2](https://huggingface.co/zai-org/GLM-5.2), [GLM-5.3](https://huggingface.co/zai-org/GLM-5.3), [GLM-5.3-Flash](https://huggingface.co/zai-org/GLM-5.3-Flash)
-- Community license discussion: The New Stack (Aug 2026), smol.ai (Aug 2026)
+- Community license discussion: [The New Stack (Aug 2026)](https://thenewstack.io/zai-glm-weights-license/), [smol.ai (Aug 2026)](https://news.smol.ai/)

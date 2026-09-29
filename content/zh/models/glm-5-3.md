@@ -42,4 +42,4 @@ GLM-5.3 是 Z.ai 的旗舰模型，发布于 2026 年 8 月。它的特别之处
 - [GLM-5.3 模型卡](https://huggingface.co/zai-org/GLM-5.3)（许可字段、评测结果）
 - [Artificial Intelligence News 分析，2026-08-18](https://www.artificialintelligence-news.com/news/zhipu-glm-5-3-benchmarks-explained/)
 - [SemiAnalysis inference 报道](https://inferencex.semianalysis.com/model/glm-5-3)（后训练发布、Yicai 时间）
-- 社区许可讨论：The New Stack（2026-08）、ThursdAI 周报
+- 社区许可讨论：[The New Stack（2026-08）](https://thenewstack.io/zai-glm-weights-license/)

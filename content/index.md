@@ -1,6 +1,6 @@
 ---
 title: "Z.ai Field Guide"
-description: "An independent, source-linked guide to Z.ai and Zhipu AI: chat.z.ai, code.z.ai, the GLM model line, and the company's full history."
+description: "An independent, source-linked guide to Z.ai and Zhipu AI: chat.z.ai, the GLM Coding Plan, the GLM model line, and the company's full history."
 author: "Z.ai Field Guide"
 date: "2026-09-29"
 tags: [zhipu, glm, ecosystem]
@@ -19,7 +19,7 @@ Z.ai is the international face of Zhipu AI (智谱), the Beijing lab that has be
   <a class="card" href="code/">
     <span class="card-kicker">Product</span>
     <span class="card-title">Code on Z.ai</span>
-    <span class="card-body">code.z.ai and the GLM Coding Plan for Claude Code, OpenCode, and more.</span>
+    <span class="card-body">The GLM Coding Plan for Claude Code, OpenCode, and more.</span>
   </a>
   <a class="card" href="api/">
     <span class="card-kicker">Developer</span>
@@ -32,7 +32,7 @@ Z.ai is the international face of Zhipu AI (智谱), the Beijing lab that has be
 
 - **GLM-5.3** (August 2026) is the flagship: a post-training upgrade over GLM-5.2 that Z.ai reports as a 50 percent coding gain, with state-of-the-art results among open-weight models on benchmark suites such as Terminal Bench 3.0. It is also the release that showed unexpected cybersecurity capability, and the first flagship outside the MIT license the series used through GLM-5.2.
 - **GLM-5.3-Flash** (August 2026) is the complementary release: a natively multimodal model with 320B total and 18B active parameters, MIT licensed, that powers chat.z.ai and runs at one tenth the price of the flagship.
-- **chat.z.ai and code.z.ai** are the two consumer-facing doors into that stack. The coding plan starts at 18 USD per month and is accepted by more than twenty agent harnesses, including Claude Code, Cline, OpenCode, and the ZCode and OpenClaw tools.
+- **chat.z.ai and the GLM Coding Plan** are the two front doors into that stack. The coding plan starts at 18 USD per month and is accepted by more than twenty agent harnesses, including Claude Code, Cline, OpenCode, and the ZCode and OpenClaw tools.
 
 ## The record
 

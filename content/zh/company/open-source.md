@@ -27,9 +27,9 @@ layout: "layout-zai-zh"
 | ZCode | Z.ai 的编程智能体 | 7.1k |
 | GLM-4 / GLM-4.5 | 系列仓库 | 7.1k / 4.4k |
 | GLM-4-Voice | 端到端语音 | 3.2k |
-| GLM-TTS、GLM-ASR、GLM-Image | 语音与图像模型（2025-2026） | 各 1.0k+ |
+| GLM-TTS、GLM-ASR、GLM-Image | 语音与图像模型（2025-2026） | 1.1k / 0.9k / 1.1k |
 
-研究侧（THUDM）还有 RL 后训练框架 slime（8.6k）、AgentBench（3.8k）、LongBench、LongWriter，以及早于公司本身的 P-tuning 系列。
+研究侧（THUDM）还有 RL 后训练框架 slime（8.6k）、AgentBench（3.8k）、LongBench、LongWriter，以及 P-tuning 系列。
 
 ## 许可曲线
 
@@ -45,4 +45,4 @@ layout: "layout-zai-zh"
 
 - [GitHub 组织：zai-org](https://github.com/zai-org) 与 [THUDM](https://github.com/THUDM)（仓库数据经 GitHub API 核对，2026-09-29）
 - 许可字段来源：[GLM-5.2](https://huggingface.co/zai-org/GLM-5.2)、[GLM-5.3](https://huggingface.co/zai-org/GLM-5.3)、[GLM-5.3-Flash](https://huggingface.co/zai-org/GLM-5.3-Flash) 模型卡
-- 社区许可讨论：The New Stack（2026-08）、smol.ai（2026-08）
+- 社区许可讨论：[The New Stack（2026-08）](https://thenewstack.io/zai-glm-weights-license/)、[smol.ai（2026-08）](https://news.smol.ai/)

@@ -19,7 +19,7 @@ The vision is not a bolt-on. Flash observes interfaces, rendering results, and i
 
 ## Benchmarks and price
 
-Z.ai says Flash outperforms GLM-5.2 across public benchmarks at one tenth the API price and "approaches Claude Opus 4.8" on coding and agentic tests. The model card records 84.3 on Terminal Bench 2.1 (mini-swe-agent harness, 400K context). API pricing is $0.15 per million input tokens and $0.50 output, with a cached-input rate of $0.03. A faster FlashX tier (200 tokens/second) runs $0.37 / $1.25.
+Z.ai says Flash outperforms GLM-5.2 across public benchmarks at one tenth the API price and "approaches Claude Opus 4.8" on coding and agentic tests. The model card records 84.3 on Terminal Bench 2.1 (Claude Code harness). API pricing is $0.15 per million input tokens and $0.50 output, with a cached-input rate of $0.03. A faster FlashX tier (200 tokens/second) runs $0.37 / $1.25.
 
 ## The alias story
 

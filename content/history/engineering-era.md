@@ -11,7 +11,7 @@ categories: [history]
 
 ## January: the listing
 
-On January 8, 2026, Beijing Zhipu Huazhang listed on the Hong Kong exchange under stock code 2513, billed as the world's first listed large-model company. The offering priced at 116.2 Hong Kong dollars per share, raised roughly 4.3 billion Hong Kong dollars initially, drew 1,164x oversubscription, and assembled eleven cornerstone investors. The first-day market capitalization topped 51 billion Hong Kong dollars. By mid-February the stock had tripled from its IPO price, and reporting through the spring described market capitalization in the hundreds of billions of Hong Kong dollars - alongside an annual loss of roughly 4.7 billion yuan for 2025. Both numbers are real; both belong in an honest telling.
+On January 8, 2026, Beijing Zhipu Huazhang listed on the Hong Kong exchange under stock code 2513, billed as the world's first listed large-model company. The offering priced at 116.2 Hong Kong dollars per share, raised roughly 4.3 billion Hong Kong dollars initially, drew 1,159.46x oversubscription, and assembled eleven cornerstone investors. The first-day market capitalization topped 51 billion Hong Kong dollars. By mid-February the stock had tripled from its IPO price, and reporting through the spring described market capitalization in the hundreds of billions of Hong Kong dollars - alongside an annual loss of roughly 4.7 billion yuan for 2025. Both numbers are real; both belong in an honest telling.
 
 ## February through June: the GLM-5 generation
 
@@ -19,7 +19,7 @@ While the stock ran, the lab shipped: [GLM-5](../models/glm-5-family.md) in Febr
 
 ## June onward: the A-share sprint
 
-Six months after listing in Hong Kong, the company moved for a second venue. On June 1, 2026, the board approved a plan to issue A-shares and list on Shanghai's STAR Market; by June 17, regulators had accepted the IPO coaching filing, with Guotai Haitong and CICC as sponsors. Reported target: roughly 15 billion yuan raised, making Zhipu a rare "A+H" dual-platform AI listing.
+Six months after listing in Hong Kong, the company moved for a second venue. On June 1, 2026, the board approved a plan to issue A-shares and list on Shanghai's STAR Market; by June 17, the IPO coaching status had moved to the acceptance stage, with Guotai Haitong and CICC as sponsors. Reported target: roughly 15 billion yuan raised, making Zhipu a rare "A+H" dual-platform AI listing.
 
 ## August: the 5.3 pair
 
@@ -31,7 +31,7 @@ The open questions are the interesting ones: whether the A-share process complet
 
 ## Sources
 
-- [STCN](https://www.stcn.com/article/detail/3644547.html) and [BAAI Hub](https://hub.baai.ac.cn/view/51541) (HKEX listing details)
+- [STCN](https://www.stcn.com/article/detail/3644547.html) and [BAAI Hub](https://hub.baai.ac.cn/view/51541) (HKEX listing details); [21jingji](https://www.21jingji.com/article/20260108/herald/559ffa0363fce26d07d99344f061b21b.html) (allotment results)
 - [21jingji](https://www.21jingji.com/article/20260622/herald/dded2f6efc378a87d16bed2cba40da79.html) (STAR Market filing, target size)
 - [Sina Finance](https://finance.sina.com.cn) (June 17 coaching acceptance; loss figure analysis)
 - [Release notes](https://docs.z.ai/release-notes/new-released) (model dates)

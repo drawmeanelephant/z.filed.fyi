@@ -11,7 +11,7 @@ A model family is only as useful as the surfaces it plugs into. Zhipu's ecosyste
 
 ## Agent harnesses
 
-The GLM Coding Plan advertises compatibility with more than twenty coding agents. The officially named set includes Claude Code, Cline, OpenCode, and Kilo Code, and Z.ai's own documentation explicitly lists Clawdbot/OpenClaw alongside ZCode, the company's first-party terminal agent (7,000+ stars within weeks of its September 2026 debut, with its own plugin marketplace). Third-party trackers add Cursor, Zed pipelines, and others to the list. The subtext: Z.ai's models meet developers wherever they already work rather than demanding a new editor.
+The GLM Coding Plan advertises compatibility with more than twenty coding agents. The officially named set includes Claude Code, Cline, OpenCode, and Kilo Code, and Z.ai's own documentation explicitly lists Clawdbot/OpenClaw alongside ZCode, the company's first-party coding harness (7,000+ stars within weeks of its September 2026 debut, with its own plugin marketplace). Third-party trackers add Cursor, Zed pipelines, and others to the list. The subtext: Z.ai's models meet developers wherever they already work rather than demanding a new editor.
 
 ## Tools and protocols
 

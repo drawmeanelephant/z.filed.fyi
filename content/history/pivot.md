@@ -11,7 +11,7 @@ If 2023 made Zhipu known and 2024 made it rich, 2025 made it unavoidable. The th
 
 ## July: GLM-4.5 and a new name
 
-On July 28, 2025, Zhipu released GLM-4.5 and GLM-4.5-Air as "ARC" foundation models - agentic, reasoning, coding - with doubled parameter efficiency and, critically, one-click compatibility with the Claude Code framework. The same week, the company rebranded its international platform as Z.ai, picking a name that travels better than "Zhipu Huazhang" and setting up an English-language product surface: z.ai, chat.z.ai, and later code.z.ai.
+On July 28, 2025, Zhipu released GLM-4.5 and GLM-4.5-Air as "ARC" foundation models - agentic, reasoning, coding - with doubled parameter efficiency and, critically, one-click compatibility with the Claude Code framework. The same week, the company rebranded its international platform as Z.ai, picking a name that travels better than "Zhipu Huazhang" and setting up an English-language product surface: z.ai, chat.z.ai, and later the GLM Coding Plan.
 
 ## August through December: the cadence
 
@@ -23,7 +23,7 @@ On July 28, 2025, Zhipu released GLM-4.5 and GLM-4.5-Air as "ARC" foundation mod
 
 ## The business behind it
 
-The strategy was expensive and it worked. A reported three-billion-yuan round arrived in 2025 with commercialization revenue already growing at triple-digit percentages. The developer platform grew into the millions of registered users, and BigModel, the enterprise MaaS platform, reported the sort of "billion-era" token numbers that sound like marketing until the open-platform leaderboards back them up. Meanwhile the company was visibly preparing for public markets: reporting through late 2025 described a Hong Kong listing as imminent.
+The strategy was expensive and it worked. A reported three-billion-yuan round closed in December 2024, and a further strategic round arrived in March 2025, with commercialization revenue already growing at triple-digit percentages. The developer platform grew into the millions of registered users, and BigModel, the enterprise MaaS platform, reported the sort of "billion-era" token numbers that sound like marketing until the open-platform leaderboards back them up. Meanwhile the company was visibly preparing for public markets: reporting through late 2025 described a Hong Kong listing as imminent.
 
 ## Why it mattered
 

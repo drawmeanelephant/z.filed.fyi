@@ -20,7 +20,7 @@ GLM-5.3-Flash 是 GLM-5 系列中首个原生多模态模型，Z.ai 对它的定
 
 ## 基准与价格
 
-Z.ai 称 Flash 以旗舰十分之一的 API 价格在公开基准上全面超过 GLM-5.2，并在编程与智能体评测上「接近 Claude Opus 4.8」。模型卡记录 Terminal Bench 2.1 得分 84.3（mini-swe-agent 框架、400K 上下文）。API 定价为每百万输入 token 0.15 美元、输出 0.50 美元，缓存输入 0.03 美元。更快的 FlashX 档（200 token/秒）为 $0.37 / $1.25。
+Z.ai 称 Flash 以旗舰十分之一的 API 价格在公开基准上全面超过 GLM-5.2，并在编程与智能体评测上「接近 Claude Opus 4.8」。模型卡记录 Terminal Bench 2.1 得分 84.3（Claude Code 框架）。API 定价为每百万输入 token 0.15 美元、输出 0.50 美元，缓存输入 0.03 美元。更快的 FlashX 档（200 token/秒）为 $0.37 / $1.25。
 
 ## 别名故事
 

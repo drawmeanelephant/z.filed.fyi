@@ -12,7 +12,7 @@ layout: "layout-zai-zh"
 
 ## 智能体工具
 
-GLM 编程套餐宣称兼容二十余种编程智能体。官方点名的包括 Claude Code、Cline、OpenCode 与 Kilo Code；Z.ai 文档还把 Clawdbot/OpenClaw 与自家的 ZCode 并列列出——后者是公司的第一方终端智能体（2026 年 9 月上线后数周内星标超过 7,000，并拥有自己的插件市场）。第三方统计把 Cursor、Zed 流水线等也计入名单。潜台词是：让模型去找开发者，而不是要求开发者换工具。
+GLM 编程套餐宣称兼容二十余种编程智能体。官方点名的包括 Claude Code、Cline、OpenCode 与 Kilo Code；Z.ai 文档还把 Clawdbot/OpenClaw 与自家的 ZCode 并列列出——后者是公司的第一方编程智能体（2026 年 9 月上线后数周内星标超过 7,000，并拥有自己的插件市场）。第三方统计把 Cursor、Zed 流水线等也计入名单。潜台词是：让模型去找开发者，而不是要求开发者换工具。
 
 ## 工具与协议
 

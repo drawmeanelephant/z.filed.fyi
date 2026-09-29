@@ -15,7 +15,7 @@ A 130-billion-parameter bilingual (Chinese-English) pretrained model released op
 
 ## ChatGLM-6B (March 2023)
 
-The breakout. A 6-billion-parameter chat model that ran on a single GPU, released as open source weeks after ChatGPT-mania began. It accumulated tens of thousands of GitHub stars and, per Chinese tech press retrospectives, more than ten million cumulative downloads - for many developers in China it was the first large model they ever ran locally. ChatGLM2-6B (June 2023) and ChatGLM3 (October 2023) followed at roughly quarterly cadence.
+The breakout. A 6-billion-parameter chat model that ran on a single GPU, released as open source in March 2023, on the day GPT-4 was announced. It accumulated tens of thousands of GitHub stars and, per Chinese tech press retrospectives, more than ten million cumulative downloads - for many developers in China it was the first large model they ever ran locally. ChatGLM2-6B (June 2023) and ChatGLM3 (October 2023) followed at roughly quarterly cadence.
 
 ## GLM-4 (January 16, 2024)
 
@@ -25,7 +25,7 @@ At its DevDay event, Zhipu announced GLM-4 as a new-generation base model with d
 
 - June 2024: GLM-4-9B and the vision-capable GLM-4V-9B open-sourced, with multimodal quality described as approaching GPT-4V level.
 - July 2024: video generation, the CogVideoX line.
-- September 2024: at KDD, the GLM-4-Plus generation plus CogView3-Plus (images) and GLM-4V-Plus (vision), forming the hosted lineup that carried into 2025.
+- August 2024: at KDD, the GLM-4-Plus generation plus CogView3-Plus (images) and GLM-4V-Plus (vision), forming the hosted lineup that carried into 2025.
 
 Alongside the text models, the period built a multimodal portfolio that still exists: CodeGeeX for code (2022, KDD 2023), CogVLM (2023), CogView for images, CogVideo for video, and GLM-4-Voice for speech. When the open-weights turn arrived in 2025, it had a decade of bench research and a full modality shelf to build on.
 

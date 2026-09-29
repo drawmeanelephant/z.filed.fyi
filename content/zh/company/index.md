@@ -12,7 +12,7 @@ layout: "layout-zai-zh"
 
 ## 它是什么
 
-一个变成平台公司的研究实验室。机构层面的事实：2019 年 6 月从清华大学知识工程实验室分立成立，总部在北京；英文产品面在 z.ai，开发者文档在 docs.z.ai。产品覆盖消费级对话（[chat.z.ai](../chat/index.md)）、编程订阅（[code.z.ai](../code/index.md)）、API 平台（[docs.z.ai](../api/index.md)），以及面向中国市场的企业产品。[历史部分](../history/index.md)讲述研究脉络；本页讲生意。
+一个变成平台公司的研究实验室。机构层面的事实：2019 年 6 月从清华大学知识工程实验室分立成立，总部在北京；英文产品面在 z.ai，开发者文档在 docs.z.ai。产品覆盖消费级对话（[chat.z.ai](../chat/index.md)）、编程订阅（[GLM 编程套餐](../code/index.md)）、API 平台（[docs.z.ai](../api/index.md)），以及面向中国市场的企业产品。[历史部分](../history/index.md)讲述研究脉络；本页讲生意。
 
 ## 管理层
 
@@ -30,10 +30,10 @@ layout: "layout-zai-zh"
 
 | 事件 | 日期 | 详情 |
 |------|------|------|
-| 港交所上市 | 2026-01-08 | 代码 2513；发行价 116.2 港元；初始募资约 43 亿港元；超额认购 1,164 倍 |
+| 港交所上市 | 2026-01-08 | 代码 2513；发行价 116.2 港元；初始募资约 43 亿港元；超额认购 1,159.46 倍 |
 | 上市后行情 | 2026-02 | 2 月中旬股价较发行价上涨超 300%（约 485 港元）；市值突破 2000 亿港元 |
 | 科创板计划 | 2026-06-01 | 董事会批准发行 A 股并在上交所科创板上市 |
-| 辅导受理 | 2026-06-17 | 国泰海通与中金公司辅导；报道称拟募资约 150 亿元 |
+| 辅导验收 | 2026-06-17 | 国泰海通与中金公司辅导；报道称拟募资约 150 亿元 |
 
 财务数字与市值理应获得同等篇幅：与行情一起被广泛报道的，是 2025 年约 47 亿元的年度亏损。本手册把两者都当作带来源的事实，而不是论据。
 
@@ -44,7 +44,7 @@ layout: "layout-zai-zh"
 ## 来源
 
 - [亿邦动力](https://www.ebrun.com)（2026-01-19；融资总额与股东数）
-- [证券时报](https://www.stcn.com/article/detail/3644547.html)、[BAAI Hub](https://hub.baai.ac.cn/view/51541)、[投资界](https://news.pedaily.cn/202601/559635.shtml)（上市条款）
+- [证券时报](https://www.stcn.com/article/detail/3644547.html)、[BAAI Hub](https://hub.baai.ac.cn/view/51541)、[投资界](https://news.pedaily.cn/202601/559635.shtml)（上市条款）；[21 世纪经济报道](https://www.21jingji.com/article/20260108/herald/559ffa0363fce26d07d99344f061b21b.html)（配售结果）
 - [21 世纪经济报道](https://www.21jingji.com/article/20260622/herald/dded2f6efc378a87d16bed2cba40da79.html)（科创板）
 - [新浪财经](https://finance.sina.com.cn)（亏损数字）
 - [网易](https://www.163.com)（清言用户与 2024 年收入增长）

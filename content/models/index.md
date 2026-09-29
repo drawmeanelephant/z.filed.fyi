@@ -27,7 +27,7 @@ GLM stands for General Language Model, and the line runs from an academic open-s
   <li><span class="t-date">Jun 2023</span><span class="t-body"><strong>ChatGLM2-6B</strong> - second generation</span></li>
   <li><span class="t-date">Oct 2023</span><span class="t-body"><strong>ChatGLM3</strong> - third generation series</span></li>
   <li><span class="t-date">Jan 2024</span><span class="t-body"><strong>GLM-4</strong> - new base; the DevDay that anchored the 2024 lineup</span></li>
-  <li><span class="t-date">Jun-Sep 2024</span><span class="t-body"><strong>GLM-4-9B, GLM-4V-9B, GLM-4-Plus</strong> - open small models plus stronger hosted tiers</span></li>
+  <li><span class="t-date">Jun-Aug 2024</span><span class="t-body"><strong>GLM-4-9B, GLM-4V-9B, GLM-4-Plus</strong> - open small models plus stronger hosted tiers</span></li>
   <li><span class="t-date">Jul 2025</span><span class="t-body"><strong>GLM-4.5 + Air</strong> - "ARC" foundation models; the open-weights turn</span></li>
   <li><span class="t-date">Aug 2025</span><span class="t-body"><strong>GLM-4.5V, Slide/Poster Agent</strong> - vision and agentic surfaces</span></li>
   <li><span class="t-date">Sep 2025</span><span class="t-body"><strong>GLM-4.6</strong> - coding-focused flagship of 2025</span></li>

@@ -41,4 +41,4 @@ Read them as a pair. GLM-5.3 is the capability ceiling for text and a cost struc
 - [GLM-5.3 model card](https://huggingface.co/zai-org/GLM-5.3) (license field, evaluation results)
 - [Artificial Intelligence News analysis, 2026-08-18](https://www.artificialintelligence-news.com/news/zhipu-glm-5-3-benchmarks-explained/)
 - [SemiAnalysis inference coverage](https://inferencex.semianalysis.com/model/glm-5-3) (post-training-only, Yicai date)
-- Community license discussion: The New Stack post (Aug 2026), ThursdAI roundups
+- Community license discussion: [The New Stack, Aug 2026](https://thenewstack.io/zai-glm-weights-license/)

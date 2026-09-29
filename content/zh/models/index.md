@@ -28,7 +28,7 @@ GLM 意为 General Language Model。这条模型线从 2022 年的一项学术�
   <li><span class="t-date">2023-06</span><span class="t-body"><strong>ChatGLM2-6B</strong> - 第二代</span></li>
   <li><span class="t-date">2023-10</span><span class="t-body"><strong>ChatGLM3</strong> - 第三代系列</span></li>
   <li><span class="t-date">2024-01</span><span class="t-body"><strong>GLM-4</strong> - 新基座；定调 2024 年的 DevDay 发布</span></li>
-  <li><span class="t-date">2024-06 至 09</span><span class="t-body"><strong>GLM-4-9B、GLM-4V-9B、GLM-4-Plus</strong> - 开源小模型与更强的托管档位</span></li>
+  <li><span class="t-date">2024-06 至 08</span><span class="t-body"><strong>GLM-4-9B、GLM-4V-9B、GLM-4-Plus</strong> - 开源小模型与更强的托管档位</span></li>
   <li><span class="t-date">2025-07</span><span class="t-body"><strong>GLM-4.5 与 Air</strong> - 「ARC」基座模型；开放权重路线的转折点</span></li>
   <li><span class="t-date">2025-08</span><span class="t-body"><strong>GLM-4.5V 与幻灯片/海报智能体</strong> - 视觉与智能体产品线</span></li>
   <li><span class="t-date">2025-09</span><span class="t-body"><strong>GLM-4.6</strong> - 2025 年的编程旗舰</span></li>
