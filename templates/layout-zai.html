@@ -9,6 +9,7 @@
   <article class="z-article z-wrap">
     <header class="z-article-head">
       <h1 class="z-title">{{.Title}}</h1>
+      {{if .Date}}<p class="z-checked">Last checked: {{.Date}}</p>{{end}}
     </header>
     <div class="z-prose">
       {{.Content}}
