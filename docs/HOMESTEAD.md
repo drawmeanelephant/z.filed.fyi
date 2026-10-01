@@ -7,7 +7,9 @@ layer. This file is the honest residue: what worked, what fought back, and the
 repro for each item.
 
 Validated on: la-famille `dev` build from this checkout (`./bin/la-famille`),
-2026-09-29, macOS (arm64), Go 1.27.1.
+2026-09-29, macOS (arm64), Go 1.27.1. **Superseded for operational purposes by
+the pinned-release acceptance pass at the bottom of this file** — the moonshot
+log below stays as history; the site now builds in CI from the pinned release.
 
 ## Build summary
 
@@ -43,8 +45,11 @@ wc -c public/rag-archive/*             # 138,633 / 1,240 / 1,504
 Impact: the README's documented invocation silently produces an empty archive
 for any site whose project root is not the current directory. Only "Created ..."
 log lines; no warning. A deploy could ship an empty RAG bundle unnoticed.
-Workaround in this site: the `Makefile` `rag` target runs from the site
-directory and passes an absolute `OUTPUT`.
+Workaround in this site: the `Makefile` and deploy workflow keep
+`--project-root .` (run from the site directory) and pass an **absolute**
+`--output` pointing at `rag-archive/` **outside** `public/`; the publish step
+copies `rag-content.md` into `public/rag-archive/` and both pipelines end with
+`test -s public/rag-archive/rag-content.md` plus `scripts/check-rag-coverage.py`.
 Related observation: a `--output` value that is itself project-root-relative
 (e.g. `--output sites/zai/public/rag-archive`) nests the result under the
 project root; absolute `--output` behaves.
@@ -124,12 +129,136 @@ Minor; listed so the prune script's next iteration knows.
 
 ## Publishing notes
 
-- Launch option A: GitHub Action (build with the la-famille release binary,
-  upload `public/`), then any static host or Pages.
-- Launch option B: Cloudflare Pages, build command pointing at the binary with
-  `--project-root .`.
-- Keep `public/` and `.la-famille-cache.json` out of git (already ignored).
+- Live: GitHub Action (`.github/workflows/deploy.yml`) builds with the pinned
+  release binary and deploys `public/` to Cloudflare Pages project `z-filed`
+  on every push to `main` (and manual dispatch). Custom domain
+  <https://z.filed.fyi/>.
+- Keep `public/`, `rag-archive/`, and `.la-famille-cache.json` out of git
+  (already ignored).
 - `publish-check` runs clean; re-run it after content edits.
+
+## Pinned-release acceptance pass — 2026-10-01
+
+Focused acceptance-cleanup pass. No redesign, no content changes, no new
+generator features; the only behavioral deltas are the content-only RAG
+publication (below) and the added check scripts. This is the operational
+record: what the site is actually built and shipped with.
+
+### Source revision and binary
+
+- Generator: **`la-famille v0.1.0-prealpha`**, release source commit
+  `896ec96a51f988b0108aeda4e86ae75451dc3ac8`, release built
+  `2026-08-25T14:26:07Z`. Pinned in `deploy.yml` (`LA_FAMILLE_VERSION`) and
+  downloaded + `SHA256SUMS`-verified in CI on every run.
+- Local validation binary: `la-famille_0.1.0-prealpha_darwin_arm64.tar.gz`,
+  checksum-verified against the release manifest before use
+  (`grep darwin_arm64 SHA256SUMS | shasum -a 256 -c -`). A `dev` build lying
+  around (`/tmp/la-famille`, `--version` reports `commit: unknown`) was
+  rejected for this pass — **always confirm `--version` prints the pinned tag
+  before trusting a local binary**.
+- Site source: this repository at the acceptance-pass commit (content frozen
+  since the 2026-09-29 verification; see [VERIFICATION.md](VERIFICATION.md)).
+
+### Artifact
+
+`public/` as shipped: 86 `index.html` pages (29 EN + 29 ZH content pages,
+tags/categories archives, `/graph/` explorer), `search.json` (85 entries,
+full-body snippets), `sitemap.xml` (86 URLs), styled `404.html`, self-hosted
+`assets/` (CSS/JS/fonts/images, cache-busted `?v=<sha256[:8]>` URLs), and
+`rag-archive/` containing **only `rag-content.md`** (188,868 bytes).
+
+### Content-only RAG (new in this pass)
+
+The pinned release's `rag` command writes three files: `rag-content.md` (the
+page corpus) plus `rag-system.md` (embeds `.github/workflows/deploy.yml`,
+`freshness.yml`, and `README.md`) and `rag-config.md` (a full file/asset
+inventory). Shipping all three published repo internals. Accepted workaround:
+
+- `rag --output` now lands **outside** `public/` (`rag-archive/`, gitignored).
+- Only `rag-content.md` is copied into `public/rag-archive/`; the site nav's
+  "RAG archive" link points at that file, and `rag-content.md` contains no
+  references to the withheld files (verified), so nothing dangles.
+- Until the next deploy, the live site still serves the two extra files at
+  their old URLs; the first deploy built from this flow removes them.
+
+### Coverage proof
+
+`scripts/check-rag-coverage.py` (wired into `make publish` and CI, after
+`publish-check`): parses the export's `<file path="...">` blocks and compares
+each against the source tree. Result on 2026-10-01: **58/58** source files
+(29 EN + 29 ZH) embedded verbatim, **0 exclusions** (`RAG_EXCLUSIONS` in the
+script is empty and is the required place to record any future intentional
+omission), and `public/rag-archive/rag-content.md` byte-identical to the
+export. The live corpus at `/rag-archive/rag-content.md` (downloaded
+2026-10-01) is byte-identical to the local export (sha256 `917813ff…`), so
+the deployed artifact matches the source tree.
+
+### Deployment checks (compatible with the pinned release)
+
+The pinned release has no strict-mode/audit flags beyond `check`,
+`publish-check`, and the build warnings; site invariants are therefore
+enforced site-side by `scripts/audit-artifact.py` (14 checks, run after
+`make publish`; exit non-zero on failure) plus interactive verification in a
+real browser. Results 2026-10-01: **14/14 pass**, all interactive checks pass.
+
+| Area | Check | Result |
+|---|---|---|
+| Assets | No external resource loads (src/link-stylesheet/CSS url()/fetch) | pass |
+| Assets | Every `/assets/` URL cache-busted, `?v=` == sha256(file)[:8] (live and local agree) | pass |
+| Assets | Default-theme fill pruned (no `mascot-default.jpeg`, `theme.css`, …) | pass |
+| Canonical | `rel=canonical` == `https://z.filed.fyi` + page path (86 pages; spot-checked live) | pass |
+| Hreflang | `en` / `zh-CN` / `x-default` on every paired page | pass |
+| Bilingual nav | `a#lang-switch` on every paired page, correct `hreflang`; `zai.js` maps every path 1:1 (root prefix present; trees mirror 29/29). Round-trip tested: `/products/` ⇄ `/zh/products/`, ZH page fully localized | pass |
+| Search | `search.json` covers all 58 content pages (`raw-sample` excluded by design: `render: false`, served as raw `.md`, not a page); full-body snippets; client emits theme classes (`search-result-*`), results render styled and ranked (browser-verified EN+ZH) | pass |
+| Graph | `/graph/` renders with theme injection; node click selects, fills metadata sidebar (tags, links, word count), updates `?node=` deep link. Live: 58/58 nodes, 146 edges | pass |
+| Missing pages | `404.html` present in artifact; live `/this/page/does-not-exist/` and `/zh/nope/` return HTTP 404 with the styled custom page | pass |
+| Sitemap | Lists all 86 page URLs including `/graph/` | pass |
+
+### Accepted workarounds (current debt, all deliberate)
+
+- **B1** — CI and Makefile use `--project-root .` + absolute `--output` +
+  non-empty guard + coverage check. Cost: none day-to-day; revisit on bump.
+- **B2** — Latin-only tag vocabulary (CJK tags are dropped upstream); the
+  theme documents the rule.
+- **B3** — `scripts/prune-unused-assets.sh` removes the generator's unused
+  default-theme fill every build; delete when upstream makes the fill
+  configurable.
+- **B5** — ZH taxonomy labels swapped via CSS (`html[lang="zh-CN"]`), ZH
+  footer index links hardcoded (no i18n seam upstream).
+- **B6** — All `--output` values passed absolute; path semantics documented in
+  the Makefile header.
+- **Content-only RAG** — `rag-system.md`/`rag-config.md` withheld (see above).
+
+### Recovery procedure
+
+Rebuild and redeploy from scratch:
+
+1. **Get the binary.** Take `LA_FAMILLE_VERSION` / `LA_FAMILLE_REPO` from
+   `deploy.yml`; download `$base/SHA256SUMS` and the `darwin_arm64` (or
+   `linux_amd64`) tarball from the release, verify with
+   `grep <archive> SHA256SUMS | shasum -a 256 -c -`, extract, confirm
+   `./la-famille --version` prints the pinned tag + commit.
+2. **Rebuild locally.** `make publish LA_FAMILLE=/path/to/la-famille`. Expect:
+   `check` 0 errors / 0 warnings; build ~85 pages; `publish-check` exit 0;
+   `check-rag-coverage.py` 58/58, 0 exclusions, deployed copy identical.
+3. **Audit the artifact.** `python3 scripts/audit-artifact.py` → 14/14 pass.
+4. **Deploy.** Push to `main` (or `gh workflow run deploy.yml`). Watch with
+   `gh run list --workflow=deploy.yml` / `gh run watch`. Required secrets:
+   `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (Pages edit rights).
+5. **Verify live.** `https://z.filed.fyi/rag-archive/rag-content.md` returns
+   200 and is byte-identical to `rag-archive/rag-content.md`;
+   `rag-system.md`/`rag-config.md` return 404; a bogus URL returns the styled
+   404; one page's `?v=` asset hash matches `shasum -a 256` of the live file.
+6. **Roll back** via Cloudflare Pages deployment history (dashboard →
+   z-filed → deployments → previous deployment → restore), or revert the
+   commit and let CI redeploy.
+
+### Still open (human, not agent)
+
+- Sign-off on publication scope, rights, and upkeep (licensing placeholders
+  in the README are still TBD by the repository owner).
+- A non-author reader attempting one English and one Chinese task (a
+  bilingual reader covers both); an agent walkthrough is not a substitute.
 
 ## Suggested follow-ups
 
