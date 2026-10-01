@@ -54,17 +54,23 @@ jobs:
       # --project-root stays "." and --output is absolute: a relative
       # project-root silently produces an empty RAG bundle (docs/HOMESTEAD.md B1).
       # Post-processing order mirrors `make publish`: strip, enhance, prune, verify.
+      # Content-only RAG: the export lands outside public/ and only
+      # rag-content.md is copied in — rag-system.md (repo workflows, README)
+      # and rag-config.md (full file inventory) stay out of the deployment.
       - name: Build and validate
         run: |
           set -euo pipefail
           "$RUNNER_TEMP/la-famille-bin" --project-root . check
           "$RUNNER_TEMP/la-famille-bin" --project-root . build
           "$RUNNER_TEMP/la-famille-bin" --project-root . \
-            rag --output "$PWD/public/rag-archive"
+            rag --output "$PWD/rag-archive"
+          mkdir -p public/rag-archive
+          cp rag-archive/rag-content.md public/rag-archive/rag-content.md
           python3 scripts/strip-internal-nofollow.py
           python3 scripts/enhance-artifact.py
           ./scripts/prune-unused-assets.sh
           "$RUNNER_TEMP/la-famille-bin" --project-root . publish-check
+          python3 scripts/check-rag-coverage.py
           test -s public/rag-archive/rag-content.md
           test -s public/404.html
 

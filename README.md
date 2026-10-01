@@ -11,12 +11,14 @@ With the la-famille binary available (set LA_FAMILLE to its path if needed):
 ```sh
 la-famille --project-root . build                    # -> ./public/
 la-famille --project-root . check                    # content validation
-la-famille --project-root . rag --output "$PWD/public/rag-archive"
+la-famille --project-root . rag --output "$PWD/rag-archive"
 ```
 
 Or with make: `make build`, `make check`, `make rag`, `make publish`.
 
 `make publish` runs two post-processing passes over the artifact: `scripts/strip-internal-nofollow.py` (internal links lose the sanitizer's `rel="nofollow"`; external links keep it) and `scripts/enhance-artifact.py` (hreflang alternates, graph theme injection, full-body search index, taxonomy cleanup, sitemap entry).
+
+The RAG export lands in `rag-archive/`, outside `public/`: the generator also emits `rag-system.md` (repo workflows, README) and `rag-config.md` (a full file inventory), and only the content bundle belongs on the site. `make publish` copies just `rag-content.md` into `public/rag-archive/`, then runs `scripts/check-rag-coverage.py` to prove every `content/` source file made it into the corpus before `publish-check` closes the pipeline.
 
 `public/` is the complete publish artifact. The site ships no external assets:
 fonts and images are self-hosted.
@@ -41,8 +43,9 @@ Pages on every push to `main` (and on manual dispatch).
 - Required repository secrets: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`
   (set via `gh secret set`). The token needs Cloudflare Pages edit rights on the
   account. Values are never read by a local build.
-- Each run runs `check` → `build` → `rag` → prune → `publish-check` and fails if
-  `rag-content.md` comes out empty. That guard exists because a relative
+- Each run runs `check` → `build` → `rag` (exported outside `public/`) → copy
+  `rag-content.md` only → prune → `publish-check` → RAG coverage check, and fails
+  if `rag-content.md` comes out empty. That guard exists because a relative
   `--project-root` silently yields an empty RAG bundle (see B1 in
   [docs/HOMESTEAD.md](docs/HOMESTEAD.md)); the workflow keeps the project root
   at `.` and passes an absolute `--output`.
