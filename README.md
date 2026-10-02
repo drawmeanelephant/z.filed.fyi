@@ -44,8 +44,10 @@ Pages on every push to `main` (and on manual dispatch).
   (set via `gh secret set`). The token needs Cloudflare Pages edit rights on the
   account. Values are never read by a local build.
 - Each run runs `check` → `build` → `rag` (exported outside `public/`) → copy
-  `rag-content.md` only → prune → `publish-check` → RAG coverage check, and fails
-  if `rag-content.md` comes out empty. That guard exists because a relative
+  `rag-content.md` only → prune → `publish-check` → RAG coverage check →
+  artifact audit (`scripts/audit-artifact.py`, portable and fail-closed), and
+  fails if any of them fails. Nothing is uploaded unless the audit passes. That
+  guard exists because a relative
   `--project-root` silently yields an empty RAG bundle (see B1 in
   [docs/HOMESTEAD.md](docs/HOMESTEAD.md)); the workflow keeps the project root
   at `.` and passes an absolute `--output`.

@@ -1,27 +1,92 @@
 #!/usr/bin/env python3
 """Acceptance audit of the public/ artifact (pinned-release-compatible checks).
 
-Run after `make publish`: python3 scripts/audit-artifact.py
+Run after `make publish` (it is part of `make publish` and of the deploy
+workflow, after every artifact transformation and before upload/deploy).
+
 Covers the site invariants the generator's publish-check does not: canonical
 host/paths, hreflang pairing, language-switcher presence, search-index
 coverage, cache-bust hash integrity, external-resource ban, prune result,
-content-only RAG, sitemap completeness. Exits non-zero on any failure.
-"""
-import hashlib, json, pathlib, re, sys
+content-only RAG, sitemap completeness, and absence of the generator's
+missing-page stubs (a dangling internal link makes the pinned release write an
+"Under Construction" stub page at exit 0; this audit refuses to publish one).
 
-PUB = pathlib.Path("/Users/tbuddy/dev/z/z-filed-fyi/public")
+Fails closed. Exit codes:
+  0  all checks passed
+  1  one or more checks failed
+  2  required inputs missing or unreadable — the audit did not even run
+
+Paths are resolved relative to this script's repository (its parent's parent),
+never the current working directory, so the audit behaves identically from the
+repo root, a subdirectory, or anywhere else.
+"""
+import hashlib
+import json
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+PUB = ROOT / "public"
+CONTENT = ROOT / "content"
 SITE = "https://z.filed.fyi"
+SITE_HOST = "z.filed.fyi"
+
+# Content files intentionally absent from search.json, with reasons — mirrors
+# RAG_EXCLUSIONS in check-rag-coverage.py so an omission must be recorded,
+# not missed. Both trees' raw samples: render: false, served as raw .md.
+SEARCH_EXCLUSIONS = {
+    "la-famille/raw-sample.md": "render: false — served as a raw .md file, not a page",
+    "zh/la-famille/raw-sample.md": "render: false — served as a raw .md file, not a page",
+}
+
 fails, notes = [], []
+
 
 def check(name, ok, detail=""):
     (notes if ok else fails).append(f"{'PASS' if ok else 'FAIL'} {name}" + (f" — {detail}" if detail else ""))
+
+
+def bail(message):
+    """Fail closed: the audit cannot run, so publication cannot proceed."""
+    print(f"AUDIT INPUT ERROR: {message}")
+    print("The artifact audit did not run; refusing to pass.")
+    sys.exit(2)
+
+
+# ---------- 0) Required inputs ----------
+# Everything the checks below read unconditionally must exist and be
+# non-trivial, or the audit fails closed instead of passing vacuously.
+if not PUB.is_dir():
+    bail(f"missing public/ artifact at {PUB}")
+if not CONTENT.is_dir():
+    bail(f"missing content/ sources at {CONTENT}")
+content_files = sorted(CONTENT.rglob("*.md"))
+if not content_files:
+    bail("content/ contains no markdown sources")
+pages = sorted(PUB.rglob("index.html"))
+if not pages:
+    bail("public/ contains no index.html pages — empty artifact")
+REQUIRED = [
+    "index.html",
+    "search.json",
+    "sitemap.xml",
+    "assets/js/zai.js",
+    "assets/js/search.js",
+]
+for rel in REQUIRED:
+    f = PUB / rel
+    if not f.is_file():
+        bail(f"required artifact input missing: {rel}")
+for rel in REQUIRED:
+    if (PUB / rel).stat().st_size == 0:
+        bail(f"required artifact input is empty: {rel}")
 
 # 1) No external resource loads from any page or asset
 #    Resource-loading attrs only: src=, link rel=stylesheet/icon/preload/…,
 #    CSS url()/@import, fetch(). canonical/hreflang/og meta links never fetch.
 LOAD_LINK_REL = re.compile(r'rel="(stylesheet|icon|shortcut icon|apple-touch-icon|preload|preconnect|manifest|modulepreload)"', re.I)
 ext_pat = re.compile(r'(src|href)="(https?:)?//|url\(\s*["\']?(https?:)?//|@import\s+(https?:)?//|fetch\(\s*["\'](?:https?:)?//', re.I)
-SITE_HOST = "z.filed.fyi"
 bad = []
 def external_ok(url):
     m = re.match(r'^https?://([^/"\']+)', url)
@@ -114,7 +179,6 @@ check("hreflang en/zh-CN/x-default on every paired page", not missing_hl, f"{len
 # 6) Bilingual nav: a#lang-switch on every paired page, correct hreflang,
 #    default href resolved to the counterpart (JS refines deep paths).
 switch_bad = []
-CONTENT_SECTIONS = set()
 for p in PUB.rglob("index.html"):
     rel = p.relative_to(PUB).as_posix()
     if rel.startswith(("tags/","categories/","graph/")) or rel == "404.html":
@@ -149,20 +213,30 @@ check("language switcher on every paired page", not switch_bad, f"{len(switch_ba
 # 6b) zai.js mirror: the list includes "/", so EVERY path maps 1:1 to the
 #     other tree (trees are fully mirrored 29/29). Assert that load-bearing fact.
 zjs = (PUB / "assets/js/zai.js").read_text(encoding="utf-8")
-mir = re.search(r'var mirrored = \[(.*?)\];', zjs, re.S).group(1)
-mirrored = set(re.findall(r'"([^"]+)"', mir))
-check("lang-switch JS maps every path (root prefix present)", "/" in mirrored, f"mirrored={sorted(mirrored)}")
+mir_m = re.search(r'var mirrored = \[(.*?)\];', zjs, re.S)
+if not mir_m:
+    check("lang-switch JS maps every path (root prefix present)", False, "cannot find the mirrored list in zai.js")
+else:
+    mirrored = set(re.findall(r'"([^"]+)"', mir_m.group(1)))
+    check("lang-switch JS maps every path (root prefix present)", "/" in mirrored, f"mirrored={sorted(mirrored)}")
 
 # 7) Search index: every content page (EN+ZH) present with non-trivial body text.
-#    raw-sample.md is intentionally absent: render:false, served as raw .md, not a page.
+#    Intentional exclusions are recorded in SEARCH_EXCLUSIONS above.
 sj = PUB / "search.json"
-items = json.loads(sj.read_text(encoding="utf-8")) if sj.exists() else []
+try:
+    items = json.loads(sj.read_text(encoding="utf-8"))
+except (json.JSONDecodeError, UnicodeDecodeError) as e:
+    bail(f"search.json is unreadable: {e}")
+if not isinstance(items, list):
+    bail("search.json is not a list of entries")
 urls = {it.get("u") for it in items}
 src_missing = []
-for p in pathlib.Path("/Users/tbuddy/dev/z/z-filed-fyi/content").rglob("*.md"):
-    rel = p.relative_to(pathlib.Path("/Users/tbuddy/dev/z/z-filed-fyi/content")).as_posix()
-    if rel.endswith("raw-sample.md"):
-        continue  # recorded intentional exclusion (raw sample, not a rendered page)
+n_content = 0
+for p in content_files:
+    rel = p.relative_to(CONTENT).as_posix()
+    if rel in SEARCH_EXCLUSIONS:
+        continue  # recorded intentional exclusion
+    n_content += 1
     if rel == "index.md":
         u = "/"
     elif rel.endswith("/index.md"):
@@ -173,18 +247,59 @@ for p in pathlib.Path("/Users/tbuddy/dev/z/z-filed-fyi/content").rglob("*.md"):
         u = "/zh" + u
     if u not in urls:
         src_missing.append(u)
-empty_s = [it.get("u") for it in items if not it.get("s") or len(it.get("s","")) < 40]
-check(f"search.json covers all 58 content pages ({len(items)} entries)", not src_missing, f"missing: {src_missing[:5]}" if src_missing else "")
+empty_s = [it.get("u") for it in items if not isinstance(it, dict) or not it.get("s") or len(it.get("s","")) < 40]
+check(f"search.json covers all {n_content} content pages ({len(items)} entries)", not src_missing, f"missing: {src_missing[:5]}" if src_missing else "")
 check("search entries carry full-body snippets", not empty_s, f"{len(empty_s)} thin/empty" + (f"; e.g. {empty_s[:5]}" if empty_s else ""))
 
 # 7b) search client styled (theme classes, no Tailwind utilities)
 sjs = (PUB / "assets/js/search.js").read_text(encoding="utf-8")
 check("search client emits theme classes", "search-result-link" in sjs and "line-clamp-2" not in sjs)
 
-# 8) 404 + rag-archive contents
+# 8) 404 + rag-archive contents (presence and non-emptiness are site
+#    invariants, reported as named checks rather than input errors)
 check("404.html present", (PUB / "404.html").is_file())
-rag_files = sorted(x.name for x in (PUB / "rag-archive").iterdir()) if (PUB / "rag-archive").exists() else []
-check("rag-archive contains only rag-content.md", rag_files == ["rag-content.md"], str(rag_files))
+rag_dir = PUB / "rag-archive"
+rag_files = sorted(x.name for x in rag_dir.iterdir()) if rag_dir.is_dir() else []
+rag_ok = rag_files == ["rag-content.md"] and (rag_dir / "rag-content.md").stat().st_size > 0
+detail = str(rag_files)
+if rag_files == ["rag-content.md"] and not rag_ok:
+    detail += " (empty bundle)"
+check("rag-archive contains only rag-content.md", rag_ok, detail)
+
+# 8b) No generator-generated missing-page stubs anywhere in the artifact.
+#     The pinned release writes a stub page for every dangling internal link —
+#     title "Missing Page" (or "Unresolved Note: <title>"), heading
+#     "🚧 Under Construction", body "We are still working on this content…" —
+#     and flags the node as a stub in the graph payload, all at exit 0.
+#     Checked by output markers, so it needs no generator flags.
+STUB_MARKERS = (
+    "Under Construction",
+    "We are still working on this content",
+    "Unresolved Note: ",
+)
+stub_pages = []
+for p in PUB.rglob("*.html"):
+    t = p.read_text(encoding="utf-8", errors="replace")
+    hit = next((m for m in STUB_MARKERS if m in t), None)
+    if hit:
+        stub_pages.append((p.relative_to(PUB).as_posix(), hit))
+check("no generator missing-page stubs in any page", not stub_pages, f"{len(stub_pages)} stubs" + (f"; e.g. {stub_pages[:3]}" if stub_pages else ""))
+gd = PUB / "graph/data.json"
+if gd.is_file():
+    try:
+        gdata = json.loads(gd.read_text(encoding="utf-8"))
+        graph_stubs = [
+            n.get("id") for n in gdata.get("nodes", [])
+            if n.get("stub") or n.get("type") == "stub"
+        ]
+        check("graph payload marks no missing-page stub nodes", not graph_stubs, f"stub nodes: {graph_stubs[:5]}" if graph_stubs else "")
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        check("graph payload marks no missing-page stub nodes", False, f"graph/data.json unreadable: {e}")
+else:
+    # Only the graph page can carry the payload; without the page there is
+    # nothing for a stub node to appear in.
+    check("graph payload marks no missing-page stub nodes", not (PUB / "graph/index.html").exists(),
+          "graph page present but graph/data.json missing")
 
 # 9) sitemap: every EN page + /graph/ + zh pages
 sm = (PUB / "sitemap.xml").read_text(encoding="utf-8")
