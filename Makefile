@@ -24,5 +24,9 @@ publish: build rag
 	./scripts/prune-unused-assets.sh
 	$(LA_FAMILLE) --project-root $(PROJECT_ROOT) publish-check
 	python3 scripts/check-rag-coverage.py
+	python3 scripts/audit-artifact.py
 
-.PHONY: build check rag publish
+test:
+	python3 scripts/test-audit-artifact.py
+
+.PHONY: build check rag publish test

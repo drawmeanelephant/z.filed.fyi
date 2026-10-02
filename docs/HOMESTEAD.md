@@ -260,6 +260,128 @@ Rebuild and redeploy from scratch:
 - A non-author reader attempting one English and one Chinese task (a
   bilingual reader covers both); an agent walkthrough is not a substitute.
 
+## Audit enforcement + stale-bundle follow-up — 2026-10-01
+
+Small technical follow-up to the pinned-release acceptance pass (PR #6, merged
+as `e0597c1`). No content, route, artwork, branding, or publishing-behavior
+changes; the acceptance work is turned from "a script you should remember to
+run" into "a gate that runs and refuses to pass silently".
+
+### Source revision
+
+- Site: this repository, branch with this follow-up (parent `e0597c1`, the
+  PR #6 merge); content unchanged since the 2026-09-29 verification.
+- Generator: unchanged pinned release `la-famille v0.1.0-prealpha`
+  (`896ec96a51f988b0108aeda4e86ae75451dc3ac8`, built `2026-08-25T14:26:07Z`),
+  re-downloaded for this pass and verified against `SHA256SUMS` before use
+  (`grep darwin_arm64 SHA256SUMS | shasum -a 256 -c -` → OK; `--version`
+  prints the pinned tag + commit).
+
+### What changed
+
+- **`scripts/audit-artifact.py` is portable.** All hardcoded local checkout
+  paths are gone; `public/` and `content/` resolve relative to the script's
+  repository (`__file__` → parent's parent), the same convention the other
+  site scripts already use. The audit now behaves identically from the repo
+  root, a subdirectory, or anywhere else.
+- **The audit fails closed.** Exit 0 = all checks passed; exit 1 = one or more
+  checks failed; exit 2 = a required input is missing/empty/unreadable or the
+  artifact has no pages (the audit refuses to pass vacuously on a missing or
+  empty artifact instead of crashing after printing PASS lines).
+- **Missing-page-stub check added** (compatible with the pinned release, no
+  generator flags): the release writes an "Under Construction" / "Missing
+  Page" stub page — and a `stub` node in the graph payload — for every
+  dangling internal link, at exit 0. Two checks now refuse to publish one:
+  no stub markers in any artifact HTML, and no `stub: true`/`type: "stub"`
+  nodes in `graph/data.json`.
+- Small honesty fix surfaced by the refactor: the search-coverage check now
+  computes the expected page count from `content/` (56 counted pages + the two
+  raw samples recorded in `SEARCH_EXCLUSIONS`, 85 index entries) instead of
+  printing a hardcoded "58".
+- **The audit is enforced**: it is the last step of `make publish` and of the
+  deploy workflow's build step — after every artifact transformation
+  (strip → enhance → prune → publish-check → RAG coverage), before
+  upload/deploy. The workflow's `set -euo pipefail` turns any nonzero audit
+  exit into a stopped job; nothing reaches the Upload/Deploy steps.
+- **`scripts/test-audit-artifact.py`** (new, stdlib-only, also run in CI):
+  32 tests covering path independence (real artifact audited identically from
+  `/`, the repo root, and a nested cwd; fixture site likewise; a static
+  assertion that no absolute local path appears in the audit source), the
+  fail-closed gate (missing/empty inputs, empty artifact), 19 representative
+  check failures, and enforcement (under `set -euo pipefail`, a failing audit
+  ends the pipeline before the "upload" step; a passing one lets it proceed).
+
+### Commands and results (2026-10-01, macOS arm64, pinned release binary)
+
+| Check | Command | Result |
+|---|---|---|
+| Binary provenance | download + `shasum -a 256 -c` + `--version` | OK, pinned tag + commit printed |
+| Full pipeline | `make publish LA_FAMILLE=<pinned binary>` | exit 0; check 0 err/0 warn; build 86 pages; coverage 58/58, 0 exclusions; **audit 16/16 pass** |
+| Audit from another cwd | `cd / && python3 …/scripts/audit-artifact.py` | identical output, 16/16 pass |
+| Regression tests | `python3 scripts/test-audit-artifact.py` | 32/32 OK |
+| Failed-audit proof | `set -euo pipefail` pipeline with a leak re-introduced into a copy of the real artifact (audited from `/`) | exit 1, `FAIL rag-archive contains only rag-content.md`, no "upload" step reached; same property covered by `TestEnforcement` |
+
+### Deployment identity (as observed)
+
+- Deploy run: `deploy.yml` run 36943181276 (push of the PR #6 merge),
+  2026-10-01T23:53:28Z, Cloudflare Pages project `z-filed`, branch `main`.
+- Deployment-specific URL: `https://67703d17.z-filed.pages.dev` (116 files
+  uploaded); custom domain `https://z.filed.fyi/`; pages.dev alias
+  `https://z-filed.pages.dev/`.
+
+### Observed live results — withheld RAG bundles (2026-10-01, GET, headers only)
+
+`rag-content.md` (the one bundle that should exist) is 200 with a consistent
+etag on all four URL classes — the controls are healthy. The withheld bundles:
+
+| URL | Status | Content-type | Notable headers |
+|---|---|---|---|
+| `z.filed.fyi/rag-archive/rag-system.md` (exact) | **200** | text/markdown | `age` ≈ 2.1 h, `cache-control: public, s-maxage=604800`, etag `1519292e…` |
+| `z.filed.fyi/rag-archive/rag-config.md` (exact) | **200** | text/markdown | `age` ≈ 2.1 h, `cache-control: public, s-maxage=604800`, etag `0bb8f075…` |
+| same + `?cb=<timestamp>` (cache-busted) | 404 | text/html | `cache-control: no-store` |
+| `z-filed.pages.dev/rag-archive/…` (both) | 404 | text/html | `cache-control: no-store` |
+| `67703d17.z-filed.pages.dev/rag-archive/…` (both) | 404 | text/html | `cache-control: no-store` |
+
+No bundle contents were downloaded or printed; only status, content type,
+sizes, and cache headers were recorded.
+
+**Caching layer.** The origin has the files: every URL that is not the exact
+original path returns 404 from the current deployment (cache-busted custom
+domain, pages.dev, deployment-specific URL). The exact original custom-domain
+URLs serve a cached 200: a conditional GET with the cached etag returns 304,
+`age` differs between requests (multiple edge entries), and the cached
+response carries `s-maxage=604800` — a 7-day shared TTL — while current origin
+responses carry `max-age=0, must-revalidate`. Conclusion: stale entries in the
+Cloudflare edge cache for the custom hostname `z.filed.fyi`, keyed on the
+exact URL (the query-string variants miss the entry). Removal **cannot** be
+claimed from the cache-busted or pages.dev 404s alone; the exact URLs are the
+user-visible truth, and they still serve the old bundles until the entries
+expire or are purged (up to 7 days from when they were cached).
+
+### Completed vs pending (this follow-up)
+
+Completed:
+
+- Portable, fail-closed audit with the stub check; enforced in `make publish`
+  and the deploy workflow before upload/deploy; proven to block publication on
+  failure; regression tests pass locally (32/32) and run in CI.
+- Full pipeline revalidated with the pinned release; URL matrix recorded above.
+
+Pending (needs the owner):
+
+- **Purge approval — two URLs only**: the stale custom-domain entries for
+  `https://z.filed.fyi/rag-archive/rag-system.md` and
+  `https://z.filed.fyi/rag-archive/rag-config.md`. Scope is exactly these two
+  files — no zone-wide purge, no DNS, cache-rule, or secret changes. With a
+  token that has purge rights, the minimal call is:
+  `POST /client/v4/zones/<zone_id>/purge_cache` with
+  `{"files":["https://z.filed.fyi/rag-archive/rag-system.md","https://z.filed.fyi/rag-archive/rag-config.md"]}`.
+  After an approved purge (or after the entries age out), repeat the exact-URL
+  checks above and expect 404 on all four URL classes.
+- Publication scope/rights/upkeep sign-off, and the non-author EN/ZH reader
+  test — unchanged from the acceptance pass, still not done. Homestead is
+  **not** fully accepted.
+
 ## Suggested follow-ups
 
 1. Fix B1 (small, high leverage for binary-only sites).
