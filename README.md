@@ -2,7 +2,8 @@
 
 A bilingual (English + Chinese) static site about Z.ai and Zhipu AI: the company's
 history, chat.z.ai, the GLM Coding Plan, and the GLM model line. Generated with
-[la-famille](../../README.md), a static site generator written in Go.
+[la-famille](https://github.com/drawmeanelephant/la-famille/blob/v0.1.0-prealpha/README.md),
+a static site generator written in Go (the release pinned in `deploy.yml`).
 
 ## Build
 
