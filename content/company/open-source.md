@@ -11,7 +11,7 @@ Open source is not a side project at Zhipu; it is the distribution strategy. Thi
 
 ## The inventory
 
-Star counts from GitHub, checked September 29, 2026. The organization is `zai-org` (formerly THUDM for the research repositories):
+Star counts from GitHub, checked September 29, 2026, with the fast-moving ZCode row re-checked October 21, 2026. The organization is `zai-org` (formerly THUDM for the research repositories):
 
 | Repository | What it is | Stars |
 |------------|------------|-------|
@@ -20,10 +20,10 @@ Star counts from GitHub, checked September 29, 2026. The organization is `zai-or
 | ChatGLM2/3 | Subsequent open chat generations | 15.5k / 13.6k |
 | CogVideo | Text-to-video, including CogVideoX | 13.0k |
 | CodeGeeX (1 and 2) | Multilingual code generation | 8.8k / 7.5k |
+| ZCode | Z.ai's coding agent harness | 8.1k |
 | GLM-130B | The 2022 open bilingual pretrained model | 7.6k |
 | GLM-OCR | Compact OCR model (2026) | 7.5k |
 | GLM-5 | Flagship release repository | 7.2k |
-| ZCode | Z.ai's coding agent harness | 7.1k |
 | GLM-4 / GLM-4.5 | Series repositories | 7.1k / 4.4k |
 | GLM-4-Voice | End-to-end speech | 3.2k |
 | GLM-TTS, GLM-ASR, GLM-Image | Speech and image models (2025-2026) | 1.1k / 0.9k / 1.1k |

@@ -2,7 +2,7 @@
 title: "ZCode"
 description: "Z.ai's first-party coding workbench and the official harness for GLM-5.3: desktop app, browser, and terminal, with plugins and plan perks."
 author: "Z.ai Field Guide"
-date: "2026-09-29"
+date: "2026-10-21"
 tags: [coding, agents]
 categories: [products]
 ---
@@ -13,7 +13,7 @@ ZCode is Z.ai's own coding tool: a multi-agent development environment built alo
 
 Z.ai calls ZCode a full-featured agentic development environment (ADE) for long-horizon tasks, with a proprietary agent, multi-framework compatibility, and mobile remote control. In practice: you open a project (locally, over SSH, or in WSL), assign goals, and watch multiple agents plan, edit, run, and verify from whichever surface you prefer. The company positions it as the pairing to GLM-5.3, co-tuned with the model and BYOK-capable.
 
-The code is open source: the repository (zai-org/ZCode, Apache-2.0) was created on September 20, 2026, and passed 7,000 stars within weeks (7.1k at the September 29 check; the count moves daily).
+The code is open source: the repository (zai-org/ZCode, Apache-2.0) was created on September 20, 2026, and has passed 8,000 stars (8.1k at the October 21 check; the count moves daily).
 
 ## How it connects to the plan
 
@@ -32,7 +32,7 @@ Plugins are the extensibility story. A plugin can bundle skills, commands, subag
 
 ## Versions and cadence
 
-ZCode is in rapid release: the version line reached 3.14.4 by the end of September 2026, and the changelog shows a weekly cadence, with office and coding mode switches, workflow orchestration, remote-control improvements, and safety fixes across the 3.10 to 3.14 stretch. There is also a formal feedback repository (zai-org/feedback) where user suggestions are tracked in public.
+ZCode is in rapid release: the version line reached 3.16.2 by October 20, 2026, and the changelog shows a weekly cadence, with office and coding mode switches, workflow orchestration, remote-control improvements, and safety fixes across the 3.10 to 3.16 stretch (3.15.3, for instance, fixed a 3.15.1 bug where the app failed to exit cleanly during updates). There is also a formal feedback repository (zai-org/feedback) where user suggestions are tracked in public.
 
 ## Honest notes
 
