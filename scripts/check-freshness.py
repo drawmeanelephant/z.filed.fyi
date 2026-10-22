@@ -204,10 +204,12 @@ def parse_zcode_changelog(html: str) -> list[tuple[str, str]]:
 
 
 def parse_autoclaw_changelog(html: str) -> list[tuple[str, str]]:
+    # The changelog page was redesigned in October 2026: entries are now
+    # <li class="changelog-entry" id="1.17.8"> with a <time datetime="...">.
     out = []
-    for m in re.finditer(r'changelog-version">v?(\d+\.\d+\.\d+)<', html):
+    for m in re.finditer(r'changelog-entry" id="(\d+\.\d+\.\d+)"', html):
         seg = html[m.start() : m.start() + 600]
-        d = re.search(r"(\d{4}-\d{2}-\d{2})", seg)
+        d = re.search(r'datetime="(\d{4}-\d{2}-\d{2})"', seg)
         out.append((m.group(1), d.group(1) if d else ""))
     return out
 
