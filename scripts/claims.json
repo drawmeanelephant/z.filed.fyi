@@ -18,7 +18,7 @@
       "GLM-130B": { "value": 7649, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
       "GLM-OCR": { "value": 7479, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
       "GLM-5": { "value": 7250, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
-      "ZCode": { "value": 7160, "star_tolerance_k": 0.5, "page": "content/zcode/index.md" },
+      "ZCode": { "value": 8080, "star_tolerance_k": 0.5, "page": "content/zcode/index.md" },
       "GLM-4": { "value": 7071, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
       "GLM-4.5": { "value": 4425, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
       "GLM-4-Voice": { "value": 3238, "star_tolerance_k": 0.5, "page": "content/company/open-source.md" },
@@ -40,8 +40,8 @@
     "_comment": "Latest published version. The site states these as a dated snapshot, so any newer release is drift worth a human look.",
     "zcode": {
       "url": "https://zcode.z.ai/en/changelog",
-      "version": "3.14.4",
-      "date": "2026-09-29",
+      "version": "3.16.2",
+      "date": "2026-10-20",
       "page": "content/zcode/index.md"
     },
     "autoclaw": {

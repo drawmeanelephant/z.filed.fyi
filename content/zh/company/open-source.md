@@ -12,7 +12,7 @@ layout: "layout-zai-zh"
 
 ## 仓库清单
 
-星标数来自 GitHub，核对于 2026 年 9 月 29 日。组织名为 `zai-org`（研究仓库历史上属 THUDM）：
+星标数来自 GitHub，核对于 2026 年 9 月 29 日（增长最快的 ZCode 一行于 2026 年 10 月 21 日复核）。组织名为 `zai-org`（研究仓库历史上属 THUDM）：
 
 | 仓库 | 内容 | 星标 |
 |------|------|------|
@@ -21,10 +21,10 @@ layout: "layout-zai-zh"
 | ChatGLM2/3 | 后续开源对话世代 | 15.5k / 13.6k |
 | CogVideo | 文生视频，含 CogVideoX | 13.0k |
 | CodeGeeX 1/2 | 多语言代码生成 | 8.8k / 7.5k |
+| ZCode | Z.ai 的编程智能体 | 8.1k |
 | GLM-130B | 2022 年开源双语预训练模型 | 7.6k |
 | GLM-OCR | 轻量 OCR 模型（2026） | 7.5k |
 | GLM-5 | 旗舰发布仓库 | 7.2k |
-| ZCode | Z.ai 的编程智能体 | 7.1k |
 | GLM-4 / GLM-4.5 | 系列仓库 | 7.1k / 4.4k |
 | GLM-4-Voice | 端到端语音 | 3.2k |
 | GLM-TTS、GLM-ASR、GLM-Image | 语音与图像模型（2025-2026） | 1.1k / 0.9k / 1.1k |
